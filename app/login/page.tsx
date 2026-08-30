@@ -59,32 +59,41 @@ export default function LoginPage() {
   const CurrentIcon = cyclingFeatures[featureIndex].icon;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col overflow-hidden">
+    <div className="min-h-screen flex flex-col overflow-hidden bg-[linear-gradient(135deg,#05021f_0%,#24105e_45%,#e51e83_72%,#ff5b48_100%)] text-[#ffffff]">
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-3 sm:p-4">
-        <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm lg:grid-cols-2">
+      <main className="flex-1 flex items-stretch justify-center p-0">
+        <div className="grid min-h-screen w-full overflow-hidden rounded-none border-0 bg-transparent lg:grid-cols-2">
           <motion.section
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative hidden min-h-[560px] overflow-hidden lg:block"
-            style={{ backgroundColor: '#5b5a98' }}
+            className="relative order-2 hidden min-h-screen overflow-hidden bg-[linear-gradient(135deg,#21106f_0%,#5315a7_38%,#e51e83_70%,#0878cb_100%)] bg-cover bg-center lg:block"
+            style={{ backgroundImage: 'url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iiiss-xq7dS3xEy489HL3mnMIK5BHs8fUVvn.png)', backgroundSize: '100% auto', backgroundPosition: 'right center', backgroundRepeat: 'no-repeat' }}
           >
-            <div className="relative flex h-full flex-col justify-between gap-6 p-7 text-primary-foreground">
+            <motion.img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iiiss-xq7dS3xEy489HL3mnMIK5BHs8fUVvn.png"
+              alt=""
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 1.04, x: 18 }}
+              animate={{ opacity: 1, scale: [1.04, 1.08, 1.04], x: [18, 0, 18] }}
+              transition={{ opacity: { duration: 0.8, delay: 0.2 }, scale: { duration: 10, repeat: Infinity, ease: 'easeInOut' }, x: { duration: 10, repeat: Infinity, ease: 'easeInOut' } }}
+              className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-contain object-right"
+            />
+            <div className="relative hidden h-full flex-col items-center justify-start gap-7 p-10 text-[#ffffff]" aria-hidden="true">
               <motion.img
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/login-logo-Dww63hMTeNQcRt14HmV5VEtxAUnAnF.png"
                 alt="Vivafy AI logo"
-                className="h-auto w-44 rounded-2xl bg-white/95 p-3 shadow-lg"
+                className="h-auto w-52 object-contain"
               />
               <div className="space-y-3">
                 <motion.p
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.45 }}
-                  className="text-xs font-medium uppercase tracking-[0.22em] text-primary-foreground/75"
+                  className="text-sm font-semibold uppercase tracking-[0.28em] text-[#ff7fd0]"
                 >
                   Create · Generate · Elevate
                 </motion.p>
@@ -92,9 +101,9 @@ export default function LoginPage() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.55 }}
-                  className="max-w-sm text-4xl font-semibold leading-tight text-balance"
+                  className="max-w-md text-center text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-balance"
                 >
-                  Make something remarkable.
+                  <span>Make something</span>{' '}<span className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] bg-clip-text text-transparent">remarkable.</span>
                 </motion.h1>
                 <AnimatePresence mode="wait">
                   <motion.p
@@ -103,7 +112,7 @@ export default function LoginPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.35 }}
-                    className="max-w-sm text-sm leading-6 text-primary-foreground/80"
+                    className="max-w-md text-center text-lg leading-7 text-[#c4bfd9]"
                   >
                     {cyclingFeatures[featureIndex].text}. Your next creative chapter starts here.
                   </motion.p>
@@ -116,32 +125,21 @@ export default function LoginPage() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.12, ease: 'easeOut' }}
-            className="flex items-center p-6 sm:p-10"
+            className="order-1 flex min-h-screen items-center bg-[#070329] p-3 text-[#ffffff] sm:p-5"
           >
-            <div className="w-full max-w-md space-y-8">
-              {/* Welcome Section */}
-              <div>
-                <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-primary">Welcome back</p>
-                
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={cyclingFeatures[featureIndex].text}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-muted-foreground"
-                  >
-                    Sign in to {cyclingFeatures[featureIndex].text.toLowerCase()}.
-                  </motion.p>
-                </AnimatePresence>
+            <div className="w-full max-w-md space-y-5">
+              <div className="space-y-5 text-center">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/login-logo-Dww63hMTeNQcRt14HmV5VEtxAUnAnF.png" alt="Vivafy AI" className="mx-auto h-auto w-48 object-contain" />
+                <p className="bg-[linear-gradient(90deg,#ff4ab8_0%,#ff9b4a_48%,#18d6d0_100%)] bg-clip-text text-sm font-semibold uppercase tracking-[0.28em] text-transparent">Create&nbsp; • &nbsp;Generate&nbsp; • &nbsp;Elevate</p>
+                <h1 className="text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#ffffff] sm:text-5xl">Make something <span className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] bg-clip-text text-transparent">remarkable.</span></h1>
+                <p className="text-lg leading-7 text-[#c4bfd9]">Generate professional videos.<br />Your next creative chapter starts here.</p>
               </div>
 
             {/* Form */}
             <form className="space-y-4" onSubmit={handleSignIn}>
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Email Address</label>
+                <label className="block text-sm font-medium text-foreground mb-2">Email</label>
                 <div className={`relative transition-all duration-300 rounded-lg overflow-hidden ${emailFocused ? 'ring-2 ring-ring/50' : ''
                   }`}>
                   <Mail className={`absolute left-3 top-3.5 w-5 h-5 transition-colors duration-300 ${emailFocused ? 'text-accent' : 'text-gray-500'
@@ -150,10 +148,10 @@ export default function LoginPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
+                    placeholder="Enter your email"
                     onFocus={() => setEmailFocused(true)}
                     onBlur={() => setEmailFocused(false)}
-                    className="pl-10 bg-background text-foreground placeholder-muted-foreground transition-all duration-300 focus:outline-none"
+                    className="h-14 rounded-xl border border-[#ffffff26] bg-[#100a38] pl-12 text-[#ffffff] placeholder:text-[#aaa5c5] transition-all duration-300 focus:border-[#9b5cff] focus:outline-none"
                   />
                 </div>
               </div>
@@ -172,7 +170,7 @@ export default function LoginPage() {
                     placeholder="Enter your password"
                     onFocus={() => setPasswordFocused(true)}
                     onBlur={() => setPasswordFocused(false)}
-                    className="pl-10 pr-10 bg-background text-foreground placeholder-muted-foreground transition-all duration-300 focus:outline-none"
+                    className="h-14 rounded-xl border border-[#ffffff26] bg-[#100a38] pl-12 pr-12 text-[#ffffff] placeholder:text-[#aaa5c5] transition-all duration-300 focus:border-[#9b5cff] focus:outline-none"
                   />
                   <button
                     type="button"
@@ -218,28 +216,22 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-6 rounded-lg mt-6 transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 w-full rounded-xl bg-[linear-gradient(90deg,#4d1dff_0%,#b42ed4_48%,#ff5c45_100%)] py-5 text-lg font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {loading ? 'Signing in...' : 'Sign In'}
+                {loading ? 'Signing in...' : 'Sign in'}
                 <span className="ml-2">→</span>
               </Button>
             </form>
 
-            {/* Footer Message */}
-            {/* <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-base text-[#aaa5c5]">
               Don&apos;t have an account?{' '}
-              <a href="/signup" className="text-transparent bg-gradient-to-r from-primary-400 to-pink-400 bg-clip-text font-semibold hover:opacity-80 transition-opacity">
-                Create Account
-              </a>
-            </p> */}
+              <a href="/signup" className="font-semibold text-[#9b5cff] transition-opacity hover:opacity-80">Sign up</a>
+            </p>
             </div>
           </motion.section>
         </div>
       </main>
 
-      <footer className="border-t border-border px-4 py-3 text-center text-xs text-muted-foreground">
-        Vivafy AI · Create, generate, elevate.
-      </footer>
     </div>
   );
 }

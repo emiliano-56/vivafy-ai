@@ -37,9 +37,11 @@ import {
   AreaChart,
   Bar,
   BarChart,
+  Cell,
   CartesianGrid,
   XAxis,
   YAxis,
+  ResponsiveContainer,
 } from 'recharts'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -175,9 +177,9 @@ const navGroups = [
 ]
 
 const chartConfig = {
-  revenue: { label: 'Revenue', color: 'var(--chart-2)' },
-  orders: { label: 'Orders', color: 'var(--chart-3)' },
-}
+  revenue: { label: 'Revenue', color: '#c92aa8' },
+  orders: { label: 'Orders', color: '#7435df' },
+  }
 
 export default function Page() {
   const router = useRouter()
@@ -198,7 +200,10 @@ export default function Page() {
       } = await supabase.auth.getUser()
 
       if (!user) {
-        router.replace('/')
+        if (active) {
+          setUserEmail('')
+          setProfile(null)
+        }
         return
       }
 
@@ -238,26 +243,21 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-[#ffffff] text-[#15165c]">
       <div className="flex min-h-screen">
-        <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar px-5 py-6 text-sidebar-foreground lg:flex">
-          <div className="flex items-center gap-3 px-2">
-            <div className="flex size-9 items-center justify-center rounded-xl bg-primary-foreground text-primary">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png"
-                alt="Vivafy AI"
-                className="size-9 rounded-xl bg-white object-contain p-1"
-              />
-            </div>
-            <span className="font-serif text-lg font-semibold tracking-tight">
-              Vivafy AI
-            </span>
+        <aside className="hidden w-64 shrink-0 flex-col bg-[linear-gradient(180deg,#0b0732_0%,#171052_52%,#24145e_100%)] px-5 py-6 text-[#ffffff] lg:flex">
+          <div className="flex items-center px-2">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dash-logo-v62Et9Zp5phXHx7TE9TCW3VTLyjsGc.png"
+              alt="Vivafy AI"
+              className="h-12 w-full max-w-[190px] object-contain object-left"
+            />
           </div>
 
           <div className="mt-10 flex flex-1 flex-col gap-6 overflow-y-auto pr-1">
             {navGroups.map((group) => (
               <div key={group.title}>
-                <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/55">
+                <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ffffff80]">
                   {group.title}
                 </p>
 
@@ -271,8 +271,8 @@ export default function Page() {
                       href={item.href}
                       className={`flex items-center justify-between rounded-lg px-3 py-2 text-[13px] transition-colors ${
                         item.active
-                          ? 'bg-sidebar-accent text-sidebar-accent-foreground shadow-sm'
-                          : 'text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground'
+                          ? 'bg-[linear-gradient(90deg,#4031d8,#7131d7,#08afc7)] text-[#ffffff] shadow-[0_8px_20px_rgba(24,20,112,0.35)]'
+                          : 'text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]'
                       }`}
                     >
                       <span className="flex min-w-0 items-center gap-3">
@@ -281,7 +281,7 @@ export default function Page() {
                       </span>
 
                       {item.count && (
-                        <span className="ml-2 shrink-0 rounded-full bg-primary-foreground/12 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-sidebar-foreground/75">
+                        <span className="ml-2 shrink-0 rounded-full bg-[#ffffff1f] px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[#ffffffcc]">
                           {item.count}
                         </span>
                       )}
@@ -292,14 +292,14 @@ export default function Page() {
             ))}
 
             <div>
-              <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/55">
+              <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ffffff80]">
                 Manage
               </p>
 
               <nav className="flex flex-col gap-1">
                 <a
                   href="/reseller"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
                 >
                   <CircleDollarSign className="size-4" />
                   Reseller
@@ -307,7 +307,7 @@ export default function Page() {
 
                 <a
                   href="/white"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
                 >
                   <Globe2 className="size-4" />
                   White label
@@ -315,7 +315,7 @@ export default function Page() {
 
                 <a
                   href="/connections"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
                 >
                   <Users className="size-4" />
                   Connections
@@ -324,7 +324,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="rounded-xl bg-muted/70 p-4">
+          <div className="rounded-xl bg-[#ffffff14] p-4 text-[#ffffff]">
             <div className="mb-3 flex items-center gap-2 text-xs font-medium">
               <CircleHelp className="size-4" />
               Need some help?
@@ -349,8 +349,8 @@ export default function Page() {
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground">
-                  {new Date().toLocaleDateString(undefined, {
+<p suppressHydrationWarning className="text-sm text-muted-foreground">
+                    {new Date().toLocaleDateString(undefined, {
                     weekday: 'long',
                     month: 'long',
                     day: 'numeric',
@@ -398,7 +398,7 @@ export default function Page() {
                   aria-expanded={profileOpen}
                   className="flex items-center gap-2 rounded-xl px-1 py-1 transition-colors hover:bg-secondary"
                 >
-                  <div className="flex size-9 items-center justify-center rounded-full bg-secondary text-sm font-semibold text-primary">
+                  <div className="flex size-9 items-center justify-center rounded-full bg-[linear-gradient(110deg,#003BC5_0%,#4B20D8_28%,#A52BC4_48%,#F02B75_68%,#FF9A1F_84%,#16BFC4_100%)] text-sm font-semibold text-[#ffffff] shadow-[0_6px_16px_rgba(80,32,190,0.22)]">
                     {firstName.charAt(0).toUpperCase()}
                   </div>
 
@@ -437,9 +437,10 @@ export default function Page() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative mb-8 overflow-hidden rounded-2xl bg-primary px-6 py-8 text-primary-foreground shadow-sm sm:px-10 sm:py-10"
+              className="relative mb-8 min-h-[420px] overflow-hidden rounded-[28px] bg-[linear-gradient(110deg,#003BC5_0%,#4B20D8_28%,#A52BC4_48%,#F02B75_68%,#FF9A1F_84%,#16BFC4_100%)] px-6 py-8 text-[#ffffff] shadow-[0_24px_60px_rgba(80,32,190,0.22)] sm:min-h-[434px] sm:px-10 sm:py-10 lg:min-h-[460px]"
             >
-              <div className="relative z-10 max-w-xl">
+              <div className="absolute left-6 top-8 z-10 max-w-xl sm:left-10 lg:top-10">
+                <div>
                 <Badge className="mb-5 border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/10">
                   AI creative studio
                 </Badge>
@@ -453,10 +454,12 @@ export default function Page() {
                   pages with AI built for your ideas.
                 </p>
 
-                <div className="mt-7 flex flex-wrap gap-3">
+                </div>
+
+                <div className="mt-10 flex flex-wrap gap-3 sm:mt-12">
                   <Button
                     size="lg"
-                    className="h-11 gap-2 rounded-xl bg-accent px-5 font-semibold text-accent-foreground shadow-lg shadow-accent/20 hover:bg-accent/90"
+                    className="h-12 gap-2 rounded-xl bg-[linear-gradient(100deg,#ff2fae,#ff9b24)] px-6 font-semibold text-[#ffffff] shadow-[0_12px_26px_rgba(255,104,73,0.34)] transition-transform hover:-translate-y-0.5 hover:brightness-105"
                   >
                     <Sparkles className="size-4" />
                     Start creating
@@ -465,7 +468,7 @@ export default function Page() {
                   <Button
                     size="lg"
                     variant="secondary"
-                    className="h-11 gap-2 rounded-xl bg-primary-foreground/15 px-5 font-semibold text-primary-foreground shadow-none hover:bg-primary-foreground/25 hover:text-primary-foreground"
+                    className="h-12 gap-2 rounded-xl border border-[#ffffff66] bg-[#ffffff18] px-6 font-semibold text-[#ffffff] shadow-[0_8px_20px_rgba(40,16,130,0.12)] backdrop-blur-sm transition-colors hover:bg-[#ffffff2e] hover:text-[#ffffff]"
                   >
                     Explore tools
                     <ArrowUpRight className="size-4" />
@@ -474,9 +477,10 @@ export default function Page() {
               </div>
 
               <div
-                className="relative mt-8 min-h-[245px] sm:absolute sm:inset-y-0 sm:right-6 sm:mt-0 sm:w-[46%] lg:right-10 lg:w-[40%]"
-                aria-label="AI generated marketing campaign previews"
+                className="absolute inset-0 block"
+                aria-label="Vivafy AI Studio preview"
               >
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iiiss-BUNRCsdNGUfyMDU89Od83B0y4IYu99.png" alt="Vivafy AI Studio creative workspace" className="absolute inset-y-0 right-0 h-full w-[58%] object-contain object-right" />
                 <motion.div
                   animate={{ y: [0, -6, 0], rotate: [-5, -3, -5] }}
                   transition={{
@@ -484,7 +488,7 @@ export default function Page() {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
-                  className="absolute left-5 top-8 h-52 w-36 rotate-[-5deg] overflow-hidden rounded-xl border-0 bg-card shadow-xl sm:left-8 sm:h-60 sm:w-40"
+                  className="hidden absolute left-5 top-8 h-52 w-36 rotate-[-5deg] overflow-hidden rounded-xl border-0 bg-card shadow-xl sm:left-8 sm:h-60 sm:w-40"
                 >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05e11a90-b09f-46ce-a180-e0b66359915a-x7uuvU1UvRnxfxuoRoU5TLFmZUMlNf.png"
@@ -501,12 +505,12 @@ export default function Page() {
                     ease: 'easeInOut',
                     delay: 0.4,
                   }}
-                  className="absolute right-5 top-2 h-56 w-40 rotate-[5deg] overflow-hidden rounded-xl border-0 bg-card shadow-xl sm:right-10 sm:h-64 sm:w-44"
+                  className="hidden absolute right-5 top-2 h-56 w-40 rotate-[5deg] overflow-hidden rounded-xl border-0 bg-card shadow-xl sm:right-10 sm:h-64 sm:w-44"
                 >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/d8709357-ed4c-4604-bd9b-f76d9f9b9f6c-YlLXmMINiS73ChLuUBuakrpyt4aPf3.png"
                     alt="Illustrated Open Chapters book cover"
-                    className="absolute inset-0 size-full object-cover object-center"
+className="absolute inset-y-0 right-0 h-full w-full object-contain object-right sm:w-[58%]"
                   />
                 </motion.div>
 
@@ -518,7 +522,7 @@ export default function Page() {
                     ease: 'easeInOut',
                     delay: 0.8,
                   }}
-                  className="absolute bottom-0 left-1/2 h-44 w-32 -translate-x-1/2 rotate-[1deg] overflow-hidden rounded-xl border-0 bg-card shadow-2xl sm:h-52 sm:w-36"
+                  className="hidden absolute bottom-0 left-1/2 h-44 w-32 -translate-x-1/2 rotate-[1deg] overflow-hidden rounded-xl border-0 bg-card shadow-2xl sm:h-52 sm:w-36"
                 >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bc0f1e79-8ba1-4946-8884-d04123beb4c7-prTkTa3cfVFHbCMckWEnwBt6qpb39u.png"
@@ -538,41 +542,43 @@ export default function Page() {
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
-                ['AI generations', '12,840', '+28.4%', ArrowUpRight],
-                ['Video renders', '1,284', '+18.7%', ArrowUpRight],
-                ['Voice minutes', '8,549', '+32.1%', ArrowUpRight],
-                ['Campaign lift', '4.82x', '+8.6%', ArrowUpRight],
-              ].map(([label, value, change, Icon], index) => (
+                ['AI generations', '12,840', '+28.4%', Sparkles, '#5b31e8', '#f0edff'],
+                ['Video renders', '1,284', '+18.7%', Video, '#ed2b9b', '#fff0f8'],
+                ['Voice minutes', '8,549', '+32.1%', Bot, '#10b4c8', '#e8fbfd'],
+                ['Campaign lift', '4.82x', '+8.6%', ArrowUpRight, '#ff6934', '#fff2ec'],
+              ].map(([label, value, change, Icon, color, tint], index) => (
                 <motion.div
                   key={label as string}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.07 }}
                 >
-                  <Card className="h-full">
+                  <Card className="h-full rounded-2xl border-0 bg-[#ffffff] shadow-[0_4px_18px_rgba(35,35,110,0.04)]">
                     <CardContent className="flex flex-col gap-4 p-5">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-muted-foreground">
+                        <span className="flex items-center gap-3 text-sm font-medium text-[#15165c]">
+                          <span className="flex size-10 items-center justify-center rounded-full" style={{ backgroundColor: tint as string, color: color as string }}><Icon className="size-5" /></span>
                           {label as string}
                         </span>
-                        <MoreHorizontal className="size-4 text-muted-foreground" />
+                        <MoreHorizontal className="size-5 text-[#15165c]" />
                       </div>
 
                       <div className="flex items-end justify-between gap-2">
-                        <span className="font-serif text-2xl font-semibold tracking-tight">
+                        <span className="font-serif text-[28px] font-semibold tracking-tight text-[#15165c]">
                           {value as string}
                         </span>
 
                         <Badge
-                          variant={index === 3 ? 'outline' : 'secondary'}
-                          className="gap-1 font-normal"
+                          variant="secondary"
+                          className="gap-1 rounded-full border-0 font-semibold"
+                          style={{ backgroundColor: tint as string, color: color as string }}
                         >
                           <Icon className="size-3" />
                           {change as string}
                         </Badge>
                       </div>
 
-                      <div className="h-1 rounded-full bg-muted">
+                      <div className="h-1.5 rounded-full bg-[#e8e7f5]">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{
@@ -583,7 +589,7 @@ export default function Page() {
                             delay: index * 0.12,
                             ease: 'easeOut',
                           }}
-                          className="h-1 rounded-full bg-primary"
+                          className="h-1.5 rounded-full" style={{ backgroundColor: color as string }}
                         />
                       </div>
                     </CardContent>
@@ -593,7 +599,7 @@ export default function Page() {
             </div>
 
             <div className="mt-6 grid gap-6 xl:grid-cols-[1.55fr_1fr]">
-              <Card>
+              <Card className="border-0 bg-[#ffffff] shadow-[0_4px_18px_rgba(35,35,110,0.04)]">
                 <CardHeader className="flex flex-row items-start justify-between gap-4">
                   <div>
                     <CardTitle>Generation activity</CardTitle>
@@ -611,8 +617,9 @@ export default function Page() {
                 <CardContent>
                   <ChartContainer
                     config={chartConfig}
-                    className="h-[280px] w-full"
+                    className="h-[300px] w-full"
                   >
+                    <ResponsiveContainer width="100%" height="100%">
                     <AreaChart
                       data={revenue}
                       margin={{
@@ -624,6 +631,16 @@ export default function Page() {
                     >
                       <defs>
                         <linearGradient
+                          id="revenueStroke"
+                          x1="0"
+                          y1="0"
+                          x2="1"
+                          y2="0">
+                          <stop offset="0%" stopColor="#5b31e8" />
+                          <stop offset="48%" stopColor="#d52ca8" />
+                          <stop offset="100%" stopColor="#ff8b35" />
+                        </linearGradient>
+                        <linearGradient
                           id="revenueFill"
                           x1="0"
                           y1="0"
@@ -632,12 +649,12 @@ export default function Page() {
                         >
                           <stop
                             offset="0%"
-                            stopColor="var(--color-revenue)"
+                            stopColor="#d52ca8"
                             stopOpacity={0.22}
                           />
                           <stop
                             offset="100%"
-                            stopColor="var(--color-revenue)"
+                            stopColor="#d52ca8"
                             stopOpacity={0}
                           />
                         </linearGradient>
@@ -645,7 +662,8 @@ export default function Page() {
 
                       <CartesianGrid
                         vertical={false}
-                        strokeDasharray="4 4"
+                        stroke="#e9e8f3"
+                        strokeDasharray="3 5"
                       />
 
                       <XAxis
@@ -679,15 +697,28 @@ export default function Page() {
                         dataKey="revenue"
                         type="natural"
                         fill="url(#revenueFill)"
-                        stroke="var(--color-revenue)"
-                        strokeWidth={2.5}
+                        stroke="url(#revenueStroke)"
+                        strokeWidth={3}
+                        dot={{
+                          r: 5,
+                          fill: '#ffffff',
+                          stroke: '#c92aa8',
+                          strokeWidth: 3,
+                        }}
+                        activeDot={{
+                          r: 7,
+                          fill: '#ff8b35',
+                          stroke: '#ffffff',
+                          strokeWidth: 3,
+                        }}
                       />
                     </AreaChart>
+                    </ResponsiveContainer>
                   </ChartContainer>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 bg-[#ffffff] shadow-[0_4px_18px_rgba(35,35,110,0.04)]">
                 <CardHeader className="flex flex-row items-start justify-between gap-4">
                   <div>
                     <CardTitle>Assets this week</CardTitle>
@@ -702,8 +733,9 @@ export default function Page() {
                 <CardContent>
                   <ChartContainer
                     config={chartConfig}
-                    className="h-[280px] w-full"
+                    className="h-[300px] w-full"
                   >
+                    <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={orders}
                       margin={{
@@ -713,9 +745,18 @@ export default function Page() {
                         bottom: 0,
                       }}
                     >
+                      <defs>
+                        <linearGradient id="activityBars" x1="0" y1="1" x2="0" y2="0">
+                          <stop offset="0%" stopColor="#16BFC4" />
+                          <stop offset="42%" stopColor="#4B20D8" />
+                          <stop offset="72%" stopColor="#F02B75" />
+                          <stop offset="100%" stopColor="#FF9A1F" />
+                        </linearGradient>
+                      </defs>
                       <CartesianGrid
                         vertical={false}
-                        strokeDasharray="4 4"
+                        stroke="#e9e8f3"
+                        strokeDasharray="3 5"
                       />
 
                       <XAxis
@@ -738,10 +779,13 @@ export default function Page() {
 
                       <Bar
                         dataKey="orders"
-                        fill="var(--color-orders)"
-                        radius={[5, 5, 0, 0]}
-                      />
+                        radius={[6, 6, 0, 0]}
+                        fill="url(#activityBars)"
+                      >
+                        {orders.map((entry) => <Cell key={`bar-${entry.day}`} fill="url(#activityBars)" />)}
+                      </Bar>
                     </BarChart>
+                    </ResponsiveContainer>
                   </ChartContainer>
                 </CardContent>
               </Card>
