@@ -151,7 +151,7 @@ export default function LoginPage() {
                     placeholder="Enter your email"
                     onFocus={() => setEmailFocused(true)}
                     onBlur={() => setEmailFocused(false)}
-                    className="h-14 rounded-xl border border-[#ffffff26] bg-[#100a38] pl-12 text-[#ffffff] placeholder:text-[#aaa5c5] transition-all duration-300 focus:border-[#9b5cff] focus:outline-none"
+                    className="h-14 rounded-xl border border-[#8b2de266] bg-[#070329] pl-12 text-[#ffffff] placeholder:text-[#aaa5c5] transition-all duration-300 hover:border-[#17d5da99] focus:border-[#17d5da] focus:outline-none"
                   />
                 </div>
               </div>

@@ -190,6 +190,7 @@ export default function Page() {
     package: string | null
   } | null>(null)
   const [userEmail, setUserEmail] = useState('')
+  const [activeMetric, setActiveMetric] = useState<string | null>(null)
 
   useEffect(() => {
     let active = true
@@ -459,6 +460,7 @@ export default function Page() {
                 <div className="mt-10 flex flex-wrap gap-3 sm:mt-12">
                   <Button
                     size="lg"
+                    onClick={() => router.push('/story')}
                     className="h-12 gap-2 rounded-xl bg-[linear-gradient(100deg,#ff2fae,#ff9b24)] px-6 font-semibold text-[#ffffff] shadow-[0_12px_26px_rgba(255,104,73,0.34)] transition-transform hover:-translate-y-0.5 hover:brightness-105"
                   >
                     <Sparkles className="size-4" />
@@ -468,6 +470,7 @@ export default function Page() {
                   <Button
                     size="lg"
                     variant="secondary"
+                    onClick={() => router.push('/landings')}
                     className="h-12 gap-2 rounded-xl border border-[#ffffff66] bg-[#ffffff18] px-6 font-semibold text-[#ffffff] shadow-[0_8px_20px_rgba(40,16,130,0.12)] backdrop-blur-sm transition-colors hover:bg-[#ffffff2e] hover:text-[#ffffff]"
                   >
                     Explore tools
@@ -540,12 +543,18 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
               </div>
             </motion.section>
 
+            {activeMetric && (
+              <motion.div initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} className="mb-4 flex items-center justify-between rounded-2xl border border-[#8b2de233] bg-[linear-gradient(90deg,#f7f0ff,#eefcff)] px-4 py-3 text-sm text-[#252548] shadow-[0_8px_24px_rgba(139,45,226,0.1)]" role="status">
+                <span><span className="font-semibold text-[#8b2de2]">{activeMetric}:</span> total figures from our communities generations.</span>
+                <button type="button" aria-label="Dismiss metric details" onClick={() => setActiveMetric(null)} className="ml-4 rounded-full px-2 py-1 text-[#8b2de2] transition hover:bg-[#8b2de21a]">×</button>
+              </motion.div>
+            )}
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 ['AI generations', '12,840', '+28.4%', Sparkles, '#5b31e8', '#f0edff'],
                 ['Video renders', '1,284', '+18.7%', Video, '#ed2b9b', '#fff0f8'],
-                ['Voice minutes', '8,549', '+32.1%', Bot, '#10b4c8', '#e8fbfd'],
-                ['Campaign lift', '4.82x', '+8.6%', ArrowUpRight, '#ff6934', '#fff2ec'],
+                ['Image gen', '8,549', '+32.1%', ImageIcon, '#10b4c8', '#e8fbfd'],
+                ['Landing page', '4.82x', '+8.6%', ArrowUpRight, '#ff6934', '#fff2ec'],
               ].map(([label, value, change, Icon, color, tint], index) => (
                 <motion.div
                   key={label as string}
@@ -557,10 +566,10 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                     <CardContent className="flex flex-col gap-4 p-5">
                       <div className="flex items-center justify-between">
                         <span className="flex items-center gap-3 text-sm font-medium text-[#15165c]">
-                          <span className="flex size-10 items-center justify-center rounded-full" style={{ backgroundColor: tint as string, color: color as string }}><Icon className="size-5" /></span>
+                          <span className="flex size-10 items-center justify-center rounded-full" style={{ backgroundColor: color as string, color: '#ffffff' }}><Icon className="size-5" /></span>
                           {label as string}
                         </span>
-                        <MoreHorizontal className="size-5 text-[#15165c]" />
+                        <button type="button" aria-label={`View ${label as string} details`} onClick={() => setActiveMetric(label as string)} className="rounded-full p-1 text-[#15165c] transition hover:bg-[#8b2de21a] hover:text-[#8b2de2]"><MoreHorizontal className="size-5" /></button>
                       </div>
 
                       <div className="flex items-end justify-between gap-2">

@@ -222,7 +222,7 @@ export function DeepSeekModal({ isOpen, onClose }: DeepSeekModalProps) {
                     <div
                       className={`max-w-xs rounded-lg px-4 py-2 group relative ${
                         message.role === 'user'
-                          ? 'bg-primary text-primary-foreground rounded-br-none'
+                          ? 'bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white rounded-br-none'
                           : 'bg-background text-foreground rounded-bl-none border border-border/70'
                       }`}
                     >
@@ -280,7 +280,7 @@ export function DeepSeekModal({ isOpen, onClose }: DeepSeekModalProps) {
               onClick={handleSendMessage}
               disabled={isLoading || !input.trim()}
               size="sm"
-              className="bg-primary text-white hover:bg-primary-700 text-foreground"
+              className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white transition hover:brightness-110"
             >
               {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

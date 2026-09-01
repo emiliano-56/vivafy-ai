@@ -3,12 +3,15 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Mail, MessageCircle } from 'lucide-react';
+import { VivafyHeader, primaryButton } from '@/components/vivafy-header';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-white text-foreground flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white text-foreground">
+      <VivafyHeader />
+      <div className="flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
         {/* Back Button */}
         <button
@@ -33,7 +36,7 @@ export default function ForgotPasswordPage() {
           {/* Contact Cards */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Email Card 1 */}
-            <div className="relative overflow-hidden rounded-2xl bg-primary border border-purple-500/30 p-8">
+            <div className="relative overflow-hidden rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] border border-purple-500/30 p-8">
               <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
               <div className="relative space-y-4">
                 <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-purple-600/20 border border-purple-500/30">
@@ -47,7 +50,7 @@ export default function ForgotPasswordPage() {
                 </p>
                 <a
                   href="mailto:ojjames@gmail.com?subject=Password%20Recovery%20Request"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/85 text-white rounded-lg font-semibold transition-all mt-4"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white rounded-lg font-semibold transition-all mt-4"
                 >
                   <Mail className="w-4 h-4" />
                   ojjames@gmail.com
@@ -56,7 +59,7 @@ export default function ForgotPasswordPage() {
             </div>
 
             {/* Email Card 2 */}
-            <div className="relative overflow-hidden rounded-2xl bg-primary border border-purple-500/30 p-8">
+            <div className="relative overflow-hidden rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] border border-purple-500/30 p-8">
               <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
               <div className="relative space-y-4">
                 <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-purple-600/20 border border-purple-500/30">
@@ -70,7 +73,7 @@ export default function ForgotPasswordPage() {
                 </p>
                 <a
                   href="mailto:gdev615x@gmail.com?subject=Password%20Recovery%20Request"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/85 text-white rounded-lg font-semibold transition-all mt-4"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white rounded-lg font-semibold transition-all mt-4"
                 >
                   <Mail className="w-4 h-4" />
                   gdev615x@gmail.com
@@ -111,12 +114,13 @@ export default function ForgotPasswordPage() {
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-foreground rounded-lg font-semibold transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:brightness-110"
             >
               Return to Home
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

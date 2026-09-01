@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Check, ArrowLeft, X } from 'lucide-react';
+import { VivafyHeader, primaryButton } from '@/components/vivafy-header';
 
 interface Plan {
   name: string;
@@ -93,11 +94,8 @@ export default function MyCreditsPage() {
   return (
     <div className="min-h-screen bg-white text-foreground">
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <header className="mb-8 flex items-center justify-between border-b border-border/60 pb-5">
-          <div className="flex items-center gap-3"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm" /><span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span></div>
-          <button onClick={() => window.location.href = '/dashboard'} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground transition-colors rounded-lg hover:bg-white/5"><ArrowLeft size={16} />Back to Home</button>
-        </header>
-        <div className="mb-16 flex items-center justify-between"><h1 className="text-4xl font-bold text-foreground">Billing & Credits</h1><button onClick={() => setTopUpModalOpen(true)} className="rounded-lg bg-primary px-6 py-2 font-semibold text-white transition-all shadow-lg hover:bg-primary/85">Top Up Credits</button></div>
+        <VivafyHeader />
+        <div className="mb-16 flex items-center justify-between"><h1 className="text-4xl font-bold text-foreground">Billing & Credits</h1><button onClick={() => setTopUpModalOpen(true)} className="rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-6 py-2 font-semibold text-white transition-all shadow-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">Top Up Credits</button></div>
 
         {/* Current Plan Card - Premium Style */}
         {loading ? (
@@ -106,7 +104,7 @@ export default function MyCreditsPage() {
           </div>
         ) : (
           <div className="mb-20">
-            <div className="relative overflow-hidden rounded-2xl bg-primary ttext-white border border-primary/30 p-8 md:p-12 shadow-2xl">
+            <div className="relative overflow-hidden rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] ttext-white border border-primary/30 p-8 md:p-12 shadow-2xl">
               <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
               <div className="relative">
                 <p className="text-white text-sm font-semibold uppercase tracking-wider mb-4">
@@ -169,12 +167,12 @@ export default function MyCreditsPage() {
                 key={plan.name}
                 className={`relative rounded-lg border transition-all hover:shadow-lg ${
                   plan.highlighted
-                    ? 'bg-primary border-primary/50 shadow-lg lg:scale-105'
+                    ? 'bg-[linear-gradient(90deg,#8b2de2,#17d5da)] border-primary/50 shadow-lg lg:scale-105'
                     : 'bg-white/5 border-white/10 hover:bg-white/10'
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary px-3 py-1 rounded-full text-xs font-bold text-foreground">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-3 py-1 rounded-full text-xs font-bold text-foreground">
                     Most Popular
                   </div>
                 )}
@@ -200,7 +198,7 @@ export default function MyCreditsPage() {
                     rel="noopener noreferrer"
                     className={`w-full py-2 px-4 rounded-lg font-semibold transition-all text-center ${
                       plan.highlighted
-                        ? 'bg-primary hover:bg-primary/85 text-foreground'
+                        ? 'bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-foreground'
                         : 'bg-white/10 hover:bg-white/20 text-gray-300'
                     }`}
                   >
@@ -256,13 +254,13 @@ export default function MyCreditsPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="bg-primary border border-primary/30 rounded-xl p-5">
+                  <div className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] border border-primary/30 rounded-xl p-5">
                     <p className="text-gray-300 text-sm font-semibold mb-4">
                       Ready to upgrade? Contact our team:
                     </p>
                     <a
                       href="mailto:ojjames@gmail.com"
-                      className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-primary  text-white hover:bg-primary/85 text-foreground rounded-lg font-semibold transition-all"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)]  text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-foreground rounded-lg font-semibold transition-all"
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
@@ -281,7 +279,7 @@ export default function MyCreditsPage() {
                         href={`https://${currentPlanUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-primary hover:bg-primary/85 border border-primary/30 text-foreground rounded-lg font-semibold transition-all"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 border border-primary/30 text-foreground rounded-lg font-semibold transition-all"
                       >
                         <span>{userPackage}</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

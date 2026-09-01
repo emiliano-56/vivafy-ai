@@ -11,20 +11,18 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header";
 
 export default function WhiteLabelsPage() {
   return (
     <main className="min-h-screen bg-white text-foreground">
       {/* Top Navigation */}
-      <header className="mx-auto flex max-w-7xl items-center justify-between border-b border-border/60 px-6 py-5">
-        <div className="flex items-center gap-3"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm" /><span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span></div>
-        <button onClick={() => window.location.href = '/dashboard'} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-black transition-colors rounded-lg hover:bg-white/5"><ArrowLeft size={16} />Back to Home</button>
-      </header>
+<VivafyHeader />
 
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 py-20 text-center">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-6 inline-flex rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm text-primary">
+          <div className="mb-6 inline-flex rounded-full border border-primary/30 bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/10 px-4 py-2 text-sm text-primary">
             Deploy Your Own Platform
           </div>
 
@@ -41,7 +39,7 @@ export default function WhiteLabelsPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button className="bg-primary px-8 py-6 text-white hover:bg-primary/85">
+            <Button className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
               Get White Label Package
             </Button>
 
@@ -176,7 +174,7 @@ export default function WhiteLabelsPage() {
               key={index}
               className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-foreground font-semibold text-sm">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-foreground font-semibold text-sm">
                 {index + 1}
               </div>
               <span className="text-gray-300">{item}</span>
@@ -187,7 +185,7 @@ export default function WhiteLabelsPage() {
 
       {/* Deployment */}
       <section className="mx-auto max-w-7xl px-6 py-8">
-        <div className="rounded-3xl border border-primary/20 bg-primary p-10">
+        <div className="rounded-3xl border border-primary/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] p-10">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-3xl  text-white font-bold">
@@ -233,7 +231,7 @@ export default function WhiteLabelsPage() {
               key={item.number}
               className="rounded-2xl border border-white/10 bg-white/5 p-8"
             >
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-xl font-bold">
                 {item.number}
               </div>
 
@@ -257,7 +255,7 @@ export default function WhiteLabelsPage() {
         </p>
 
         <div className="mt-10 flex justify-center gap-4">
-          <Button className="bg-primary px-8 py-6 text-foreground hover:bg-primary/85">
+          <Button className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
             View Documentation
           </Button>
 
@@ -272,7 +270,7 @@ export default function WhiteLabelsPage() {
 
       {/* CTA */}
       <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="rounded-3xl border border-primary/20 bg-primary p-12 text-center">
+        <div className="rounded-3xl border border-primary/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] p-12 text-center">
           <Zap className="mx-auto mb-6 h-14 w-14 text-primary" />
 
           <h2 className="text-4xl font-bold">
@@ -284,7 +282,7 @@ export default function WhiteLabelsPage() {
             AI content generation platform with vivafy AI technology.
           </p>
 
-          <Button className="mt-10 bg-primary px-10 py-6 text-lg hover:bg-primary/85">
+          <Button className="mt-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-10 py-6 text-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
             Get White Label Package
           </Button>
 

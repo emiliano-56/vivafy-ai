@@ -138,7 +138,7 @@ export default function PixabayPage({ isOpen, onClose }: PixabayPageProps) {
                 <Button
                   onClick={() => searchImages(1)}
                   disabled={loading}
-                  className="bg-primary hover:bg-primary/85 px-12 py-6 text-base font-semibold rounded-lg transition disabled:opacity-75"
+                  className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:brightness-110 px-12 py-6 text-base font-semibold rounded-lg transition disabled:opacity-75"
                 >
                   {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -185,7 +185,7 @@ export default function PixabayPage({ isOpen, onClose }: PixabayPageProps) {
                                 img.id
                               );
                             }}
-                            className="absolute top-3 right-3 bg-primary hover:bg-primary/85 text-primary-foreground p-2 rounded-lg transition opacity-0 group-hover:opacity-100"
+                            className="absolute top-3 right-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:brightness-110 text-primary-foreground p-2 rounded-lg transition opacity-0 group-hover:opacity-100"
                           >
                             {copiedId === `img-${img.id}` ? (
                               <Check className="w-4 h-4" />
@@ -263,7 +263,7 @@ export default function PixabayPage({ isOpen, onClose }: PixabayPageProps) {
 
                       <Button
                         onClick={() => setSelectedImage(null)}
-                        className="bg-primary hover:bg-primary/85"
+                        className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:brightness-110"
                       >
                         Close
                       </Button>

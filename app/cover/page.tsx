@@ -14,7 +14,8 @@ import {
   Upload,
 } from "lucide-react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase"
+ import { supabase } from "@/lib/supabase"
+ import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header"
 
 const aspectRatios = [
   {
@@ -488,18 +489,7 @@ export default function Page() {
         }}
       />
 
-      {/* TOP BAR */}
-      <section className="border-b border-[#5b5a98]/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-2 rounded-xl border border-[#5b5a98]/20 bg-[#5b5a98]/10 px-4 py-2 text-sm text-[#5b5a98] transition hover:border-[#4d4c82]"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to home
-          </Link>
-        </div>
-      </section>
+      <VivafyHeader />
 
       {/* HERO */}
       <section>
@@ -537,7 +527,7 @@ export default function Page() {
                     setShowModal(true);
                     loadSavedCovers();
                   }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#5b5a98]/20 bg-[#5b5a98] text-white hover:bg-[#4d4c82] transition"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#5b5a98]/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[#4d4c82] transition"
                 >
                   <Save className="h-4 w-4" />
                 </button>
@@ -546,7 +536,7 @@ export default function Page() {
                 <div className="relative">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-2 rounded-xl border border-[#5b5a98]/20 bg-[#5b5a98] px-3 py-2 text-xs text-white hover:bg-[#f26b43] hover:text-white transition"
+                    className="flex items-center gap-2 rounded-xl border border-[#5b5a98]/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-3 py-2 text-xs text-white hover:bg-[#f26b43] hover:text-white transition"
                   >
                     <ImageIcon className="h-4 w-4" />
                     Ratio
@@ -561,7 +551,7 @@ export default function Page() {
                           onClick={() => selectAspectRatio(ratio.value)}
                           className={`mb-1 w-full rounded-xl px-3 py-3 text-left text-xs ${
                             aspectRatio === ratio.value
-                              ? "bg-[#5b5a98] text-white"
+                              ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white"
                               : "hover:bg-[#f26b43] hover:text-white"
                           }`}
                         >
@@ -576,7 +566,7 @@ export default function Page() {
                 <div className="relative">
                   <button
                     onClick={() => setNicheOpen(!nicheOpen)}
-                    className="flex items-center gap-2 rounded-xl border border-[#5b5a98]/20 bg-[#5b5a98] px-3 py-2 text-xs text-white hover:bg-[#f26b43] hover:text-white transition"
+                    className="flex items-center gap-2 rounded-xl border border-[#5b5a98]/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-3 py-2 text-xs text-white hover:bg-[#f26b43] hover:text-white transition"
                   >
                     <Palette className="h-4 w-4" />
                     Niche
@@ -591,7 +581,7 @@ export default function Page() {
                           onClick={() => selectNiche(niche.value)}
                           className={`mb-1 w-full rounded-xl px-3 py-3 text-left text-xs ${
                             selectedNiche === niche.value
-                              ? "bg-[#5b5a98] text-white"
+                              ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white"
                               : "hover:bg-[#f26b43] hover:text-white"
                           }`}
                         >
@@ -616,7 +606,7 @@ export default function Page() {
             <button
               onClick={generateImage}
               disabled={loading}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#5b5a98] px-4 py-3 text-sm font-bold text-white"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-4 py-3 text-sm font-bold text-white"
             >
               {loading ? (
                 "Generating..."
@@ -652,7 +642,7 @@ export default function Page() {
               <div className="mt-4 flex w-full gap-2">
                 <button
                   onClick={downloadImage}
-                  className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-[#5b5a98] px-4 py-3 text-white hover:bg-[#4d4c82]"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-4 py-3 text-white hover:bg-[#4d4c82]"
                 >
                   <Download className="h-4 w-4" />
                   Download
@@ -661,7 +651,7 @@ export default function Page() {
                 <button
                   onClick={uploadCover}
                   disabled={savingCover}
-                  className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-[#5b5a98] px-4 py-3 text-white hover:bg-[#5b5a98] disabled:opacity-50 disabled:cursor-not-allowed transition"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-4 py-3 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >
                   <Upload className="h-4 w-4" />
                   Upload
@@ -698,7 +688,7 @@ export default function Page() {
             <h2 className="text-lg font-bold">Saved Book Covers</h2>
             <button
               onClick={() => setShowModal(false)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#5b5a98]/20 bg-[#5b5a98] text-white hover:bg-[#f26b43] hover:text-white"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#5b5a98]/20 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[#f26b43] hover:text-white"
             >
               <X className="h-4 w-4" />
             </button>
@@ -731,7 +721,7 @@ export default function Page() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => downloadSavedCover(cover.url, cover.name)}
-                          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-[#5b5a98] px-3 py-2 text-xs font-bold text-white hover:bg-[#4d4c82]"
+                          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-3 py-2 text-xs font-bold text-white hover:bg-[#4d4c82]"
                         >
                           <Download className="h-3 w-3" />
                           Download

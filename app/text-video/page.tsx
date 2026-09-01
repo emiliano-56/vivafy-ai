@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header"
 import { ArrowLeft, Download, Share2, Trash2, X, Upload, Film, ChevronLeft, ChevronRight, Wand2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
@@ -332,16 +333,7 @@ ${prompt}
 
   return (
     <div className="min-h-screen bg-white text-foreground px-6 py-10" style={{ "--primary": "#5b5a98", "--primary-foreground": "#ffffff", "--secondary": "#f1f1fb", "--secondary-foreground": "#5b5a98", "--muted": "#f7f7fc", "--muted-foreground": "#9897ad", "--accent": "#f26b43" } as React.CSSProperties}>
-      <header className="mb-8 flex items-center justify-between border-b border-border/60 pb-5">
-        <div className="flex items-center gap-3"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm" /><span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span></div>
-        <button
-          onClick={() => window.location.href = '/dashboard'}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-black hover:text-foreground transition-colors rounded-lg hover:bg-transparent "
-        >
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
-      </header>
+<VivafyHeader />
       <div className="mb-8">
         <h1 className="text-3xl font-semibold mb-2">AI Video Creator</h1>
         <p className="text-muted-foreground text-sm">Transform your ideas into stunning videos instantly</p>
@@ -362,7 +354,7 @@ ${prompt}
             />
             <button
               onClick={() => setIsDeepSeekOpen(true)}
-              className="absolute bottom-4 right-4 w-10 h-10 bg-primary text-white hover:bg-primary/85 text-white flex items-center justify-center rounded-lg transition hover:scale-110 transform duration-200"
+              className="absolute bottom-4 right-4 w-10 h-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white flex items-center justify-center rounded-lg transition hover:scale-110 transform duration-200"
               title="AI Magic - Deepseek Modal"
             >
               <Wand2 size={20} />
@@ -489,7 +481,7 @@ ${prompt}
             <button
               onClick={() => setAudio(!audio)}
               className={`w-12 h-6 flex items-center rounded-full p-1 transition ${
-                audio ? "bg-primary text-white" : "bg-gray-600"
+                audio ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white" : "bg-gray-600"
               }`}
             >
               <div
@@ -504,7 +496,7 @@ ${prompt}
           <button
             onClick={handleGenerate}
             disabled={loading || !prompt}
-            className="mt-6 w-full py-3 bg-primary text-white hover:bg-primary/85 text-white transition rounded-xl font-medium flex-shrink-0"
+            className="mt-6 w-full py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white transition rounded-xl font-medium flex-shrink-0"
           >
             {loading ? "Generating..." : "Generate Video (20 crdits)"}
           </button>
@@ -525,14 +517,14 @@ ${prompt}
                   <a
                     href={videoUrl}
                     download
-                    className="px-4 py-2 bg-primary text-white hover:bg-primary/85 text-white rounded-lg text-sm transition"
+                    className="px-4 py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white rounded-lg text-sm transition"
                   >
                     Download
                   </a>
                   <button
                     onClick={handleUploadVideo}
                     disabled={uploading}
-                    className="px-4 py-2 bg-primary text-white hover:bg-primary/85 text-white disabled:bg-primary/40 disabled:opacity-50 rounded-lg text-sm transition"
+                    className="px-4 py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/40 disabled:opacity-50 rounded-lg text-sm transition"
                   >
                     {uploading ? "Saving..." : "Upload"}
                   </button>
@@ -562,7 +554,7 @@ ${prompt}
                   <button
                     onClick={() => setCarouselPosition(Math.max(0, carouselPosition - 1))}
                     disabled={carouselPosition === 0}
-                    className="w-8 h-8 flex items-center justify-center bg-primary text-white hover:bg-primary/85 text-white disabled:bg-primary/40 disabled:cursor-not-allowed text-white rounded-lg transition"
+                    className="w-8 h-8 flex items-center justify-center bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/40 disabled:cursor-not-allowed text-white rounded-lg transition"
                     title="Previous"
                   >
                     <ChevronLeft size={18} />
@@ -570,7 +562,7 @@ ${prompt}
                   <button
                     onClick={() => setCarouselPosition(Math.min(Math.max(0, savedVideos.length - 3), carouselPosition + 1))}
                     disabled={carouselPosition >= Math.max(0, savedVideos.length - 3)}
-                    className="w-8 h-8 flex items-center justify-center bg-primary text-white hover:bg-primary/85 text-white disabled:bg-primary/40 disabled:cursor-not-allowed text-white rounded-lg transition"
+                    className="w-8 h-8 flex items-center justify-center bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/40 disabled:cursor-not-allowed text-white rounded-lg transition"
                     title="Next"
                   >
                     <ChevronRight size={18} />
@@ -619,7 +611,7 @@ ${prompt}
                       key={index}
                       onClick={() => setCarouselPosition(index * 3)}
                       className={`w-2 h-2 rounded-full transition ${
-                        Math.floor(carouselPosition / 3) === index ? "bg-primary text-white" : "bg-gray-600 hover:bg-gray-500"
+                        Math.floor(carouselPosition / 3) === index ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white" : "bg-gray-600 hover:bg-gray-500"
                       }`}
                       title={`Go to slide ${index + 1}`}
                     />
@@ -639,7 +631,7 @@ ${prompt}
                     <div className="flex gap-3 items-center justify-center">
                       <button
                         onClick={handleDownloadVideo}
-                        className="w-10 h-10 rounded-full bg-primary text-white text-white flex items-center justify-center hover:bg-primary/85 text-white transition hover:scale-110 transform duration-200"
+                        className="w-10 h-10 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white text-white flex items-center justify-center hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white transition hover:scale-110 transform duration-200"
                         title="Download"
                       >
                         <Download size={18} />
@@ -647,7 +639,7 @@ ${prompt}
 
                       <button
                         onClick={handleShareVideo}
-                        className="w-10 h-10 rounded-full bg-primary text-white text-white flex items-center justify-center hover:bg-primary/85 text-white transition hover:scale-110 transform duration-200"
+                        className="w-10 h-10 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white text-white flex items-center justify-center hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white transition hover:scale-110 transform duration-200"
                         title="Share"
                       >
                         <Share2 size={18} />

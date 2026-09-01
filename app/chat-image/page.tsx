@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { Save, Download, ArrowLeft, Wand2, History, Trash2, Share2, X, Eye, MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { DeepSeekModal } from "@/components/deepseek-modal";
-import Footer from "@/components/footer";
+ import Footer from "@/components/footer";
+ import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header";
 import { supabase } from "@/lib/supabase";
 
 /* =====================================================
@@ -313,16 +314,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground flex flex-col p-6">
       <DeepSeekModal isOpen={isDeepSeekOpen} onClose={() => setIsDeepSeekOpen(false)} />
 
-       <header className="mb-8 flex items-center justify-between border-b border-border/60 pb-5">
-        <div className="flex items-center gap-3"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm" /><span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span></div>
-        <button
-          onClick={() => window.location.href = '/dashboard'}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
-        >
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
-      </header>
+      <VivafyHeader />
 
       {/* TOAST NOTIFICATION */}
       {toast && (
@@ -368,14 +360,14 @@ export default function Home() {
                     <div className="flex gap-1">
                       <button
                         onClick={() => setFullscreenHistoryImage(img.url)}
-                        className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary-700 transition border border-primary-400/30"
+                        className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground p-2 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition border border-primary-400/30"
                         title="View fullscreen"
                       >
                         <Eye size={14} />
                       </button>
                       <button
                         onClick={() => downloadImage(img.url)}
-                        className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary transition border border-primary-300/30"
+                        className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground p-2 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] transition border border-primary-300/30"
                         title="Download image"
                       >
                         <Download size={14} />
@@ -389,7 +381,7 @@ export default function Home() {
                           e.stopPropagation()
                           setOpenMenuId(openMenuId === img.id ? null : img.id)
                         }}
-                        className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary-700 transition border border-primary-400/30"
+                        className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground p-2 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition border border-primary-400/30"
                         title="More options"
                       >
                         <MoreVertical size={14} />
@@ -403,7 +395,7 @@ export default function Home() {
                               shareImage(img.url)
                               setOpenMenuId(null)
                             }}
-                            className="w-full text-left px-3 py-2 text-foreground hover:bg-primary/30 transition flex items-center gap-2 text-sm"
+                            className="w-full text-left px-3 py-2 text-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/30 transition flex items-center gap-2 text-sm"
                             title="Share image"
                           >
                             <Share2 size={14} />
@@ -447,7 +439,7 @@ export default function Home() {
             onClick={() => setAspectRatio(ratio)}
             className={`px-3 py-1 rounded-full text-sm border transition ${
               aspectRatio === ratio
-                ? "bg-primary text-primary-foreground"
+                ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground"
                 : "border-border/70 text-foreground"
             }`}
           >
@@ -456,14 +448,14 @@ export default function Home() {
         ))}
         <button
           onClick={handleHistoryOpen}
-          className="bg-primary text-primary-foreground px-3 py-1 rounded-full hover:bg-primary-700 transition"
+          className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground px-3 py-1 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition"
           title="View saved images"
         >
           <History size={16} />
         </button>
         <button
           onClick={() => setIsDeepSeekOpen(true)}
-          className="bg-primary text-primary-foreground px-3 py-1 rounded-full hover:bg-primary-700 transition"
+          className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground px-3 py-1 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition"
           title="Open AI Assistant"
         >
           <Wand2 size={16} />
@@ -501,7 +493,7 @@ export default function Home() {
 
                     <button
                       onClick={() => downloadImage(msg.image)}
-                      className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary-700 transition flex items-center justify-center shadow-lg border border-primary-400/30"
+                      className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground p-2 rounded-full hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition flex items-center justify-center shadow-lg border border-primary-400/30"
                       title="Download image"
                     >
                       <Download size={18} />
@@ -512,8 +504,8 @@ export default function Home() {
                       disabled={uploadingImage === msg.image}
                       className={`text-foreground p-2 rounded-full transition flex items-center justify-center shadow-lg border ${
                         uploadingImage === msg.image
-                          ? "bg-primary-700 border-primary-400/50 animate-spin"
-                          : "bg-primary hover:bg-primary-700 border-primary-400/30"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 border-primary-400/50 animate-spin"
+                          : "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 border-primary-400/30"
                       }`}
                       title="Save to our storage"
                     >
@@ -554,7 +546,7 @@ export default function Home() {
           <button
             onClick={sendMessage}
             disabled={loading}
-            className="absolute right-4 bg-primary text-white hover:bg-primary-700 transition rounded-full w-12 h-12 flex items-center justify-center disabled:opacity-50 text-foreground flex-shrink-0"
+            className="absolute right-4 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]-700 transition rounded-full w-12 h-12 flex items-center justify-center disabled:opacity-50 text-foreground flex-shrink-0"
             title="Send message"
           >
             <ArrowLeft size={18} className="rotate-180" />

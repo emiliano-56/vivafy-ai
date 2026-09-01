@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header";
 import { useRouter } from "next/navigation";
 import {
   Image as ImageIcon,
@@ -682,19 +683,7 @@ const pollJobStatus = async (id: string) => {
         }
       `}      </style>
 
-      <nav className="flex shrink-0 items-center justify-between mb-5 border-b border-foreground/3 bg-card/80 px-5 py-3 backdrop-blur-sm md:px-6">
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-dBa8u2kHHJuIITpDgbw7d89Pz0WYeZ.png"
-          alt="vivafy AI"
-          className="h-10 w-auto object-contain"
-        />
-        <button
-          onClick={() => router.push("/dashboard")}
-          className="rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white transition hover:bg-primary/90"
-        >
-          Back to home
-        </button>
-      </nav>
+<VivafyHeader />
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
       {/* LEFT PANEL (UNCHANGED) */}
@@ -707,7 +696,7 @@ const pollJobStatus = async (id: string) => {
             </label>
           <button
   onClick={handleOpenLibrary}
-  className="p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90
+  className="p-2 rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90
   text-white transition-all duration-200
   active:scale-95"
   title="Video Library"
@@ -809,7 +798,7 @@ const pollJobStatus = async (id: string) => {
         <button
           onClick={handleGenerateStory}
           disabled={loading}
-          className="col-span-full w-full py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded font-semibold transition"
+          className="col-span-full w-full py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 rounded font-semibold transition"
         >
           {loading ? "Creating Story..." : "Step 1: Create Story"}
         </button>
@@ -818,7 +807,7 @@ const pollJobStatus = async (id: string) => {
           <button
             onClick={handleGenerateAllImages}
             disabled={generatingAllImages}
-            className="col-span-full w-full py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded font-semibold transition"
+            className="col-span-full w-full py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 rounded font-semibold transition"
           >
             {generatingAllImages
               ? "Generating Characters..."
@@ -830,7 +819,7 @@ const pollJobStatus = async (id: string) => {
   <button
     onClick={handleRenderMovie}
     disabled={processingMovie}
-    className="w-full py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded font-semibold transition"
+    className="w-full py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 rounded font-semibold transition"
   >
     {processingMovie
       ? `Processing (${jobStatus})`
@@ -909,8 +898,8 @@ const pollJobStatus = async (id: string) => {
                     onClick={handleDownloadVideo}
                     className="
                     flex-1
-                    bg-primary text-primary-foreground
-                    hover:bg-primary/90
+                    bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground
+                    hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90
                     p-3
                     rounded
                     text-sm
@@ -925,8 +914,8 @@ const pollJobStatus = async (id: string) => {
                     disabled={uploading}
                     className="
                     flex-1
-                    bg-primary text-primary-foreground
-                    hover:bg-primary/90
+                    bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground
+                    hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90
                     p-3
                     rounded
                     text-sm
@@ -1016,7 +1005,7 @@ const pollJobStatus = async (id: string) => {
                                 onClick={() =>
                                   moveNarration(i, nIdx, "up")
                                 }
-                                className="bg-primary text-white p-1 rounded hover:bg-primary text-primary-foreground"
+                                className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white p-1 rounded hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground"
                                 title="Move up"
                               >
                                 <ChevronUp className="w-3 h-3" />
@@ -1026,7 +1015,7 @@ const pollJobStatus = async (id: string) => {
                                 onClick={() =>
                                   moveNarration(i, nIdx, "down")
                                 }
-                                className="bg-primary text-white p-1 rounded hover:bg-primary text-primary-foreground"
+                                className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white p-1 rounded hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground"
                                 title="Move down"
                               >
                                 <ChevronDown className="w-3 h-3" />
@@ -1120,7 +1109,7 @@ const pollJobStatus = async (id: string) => {
                         )
                       }
                       disabled={previewLoading === i}
-                      className="mt-2 w-full bg-primary text-white hover:bg-primary/90 p-2 rounded text-xs"
+                      className="mt-2 w-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 p-2 rounded text-xs"
                     >
                       {previewLoading === i
                         ? "Generating Preview..."
@@ -1173,7 +1162,7 @@ const pollJobStatus = async (id: string) => {
                           });
                         }
                       }}
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 p-2 rounded transition"
+                      className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 p-2 rounded transition"
                       title="Play/Pause"
                     >
                       {musicPlaying[i] ? (
@@ -1298,7 +1287,7 @@ waveColor: "var(--primary)",
                     <div className="hidden group-hover/image:flex mt-1">
   <button
   onClick={handleOpenLibrary}
-  className="p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90
+  className="p-2 rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90
   text-white transition-all duration-200
   active:scale-95"
   title="Video Library"

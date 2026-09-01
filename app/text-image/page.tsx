@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header"
 import { motion } from "framer-motion"
 import { Download, Sparkles, X, ArrowLeft, Copy, Check, Save, Share2, Trash2, ChevronLeft, ChevronRight, ImageIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -457,15 +458,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col">
-      <header className="border-b border-foreground/10 bg-background/95 px-6 py-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-9 rounded-xl object-contain bg-white p-1" />
-            <span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span>
-          </div>
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 rounded-xl border border-foreground/10 px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"><ArrowLeft size={18} />Back to Home</button>
-        </div>
-      </header>
+<VivafyHeader />
       <div className="flex-1 p-6 sm:p-8">
         <div className="mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="mb-8">
@@ -512,7 +505,7 @@ export default function Page() {
                 <div className="flex items-start gap-2">
                   <div
                     className={`max-w-2xl px-4 py-3 rounded-lg ${msg.role === "user"
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground"
                       : "bg-transparent text-foreground"
                       }`}
                   >
@@ -594,7 +587,7 @@ export default function Page() {
               <button
                 onClick={handleAiPrompt}
                 disabled={aiLoading || !aiPrompt.trim()}
-                className="px-4 py-2 rounded-lg text-white bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium h-fit"
+                className="px-4 py-2 rounded-lg text-white bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium h-fit"
               >
                 {aiLoading ? "..." : "Send"}
               </button>
@@ -618,7 +611,7 @@ export default function Page() {
                   />
                   <button
                     onClick={() => setAiModalOpen(true)}
-                    className="absolute bottom-3 right-3 p-2 rounded-lg bg-primary hover:bg-primary/90 transition-colors"
+                    className="absolute bottom-3 right-3 p-2 rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 transition-colors"
                     title="Open AI Assistant"
                   >
                     <Sparkles size={18} className="text-white" />
@@ -729,7 +722,7 @@ export default function Page() {
               <button
                 onClick={handleGenerate}
                 disabled={loading || !prompt.trim()}
-                className="w-full rounded-lg bg-primary px-6 py-3 text-white font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-6 py-3 text-white font-medium hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? "Generating..." : "Generate Image (10 credits)"}
               </button>
@@ -751,7 +744,7 @@ export default function Page() {
                   <button
                     onClick={() => uploadToSupabase()}
                     disabled={saving}
-                    className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                    className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                     title={saving ? "Saving..." : "Save to Supabase"}
                   >
                     <Save size={20} className="text-foreground" />
@@ -774,7 +767,7 @@ export default function Page() {
             ) : (
               <div className="mt-8 flex min-h-[292px] items-center justify-center rounded-2xl border border-dashed border-ring/50 bg-secondary/45 p-8 text-center shadow-sm">
                 <div className="flex max-w-md flex-col items-center gap-4">
-                  <div className="flex size-16 items-center justify-center rounded-full bg-primary/12 text-primary ring-8 ring-primary/5">
+                  <div className="flex size-16 items-center justify-center rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/12 text-primary ring-8 ring-primary/5">
                     <ImageIcon size={30} strokeWidth={1.8} />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -797,14 +790,14 @@ export default function Page() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => scrollCarousel("left")}
-                      className="p-1.5 bg-primary text-white hover:bg-primary/90 rounded-full transition-colors"
+                      className="p-1.5 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 rounded-full transition-colors"
                       title="Previous images"
                     >
                       <ChevronLeft size={16} />
                     </button>
                     <button
                       onClick={() => scrollCarousel("right")}
-                      className="p-1.5 bg-primary text-white hover:bg-primary/90 rounded-full transition-colors"
+                      className="p-1.5 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 rounded-full transition-colors"
                       title="Next images"
                     >
                       <ChevronRight size={16} />
@@ -901,7 +894,7 @@ export default function Page() {
               <button
                 onClick={() => downloadImage(fullscreenImage)}
                 disabled={downloadingImage === fullscreenImage}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 title={downloadingImage === fullscreenImage ? "Downloading..." : "Download"}
               >
                 <Download size={20} className="text-foreground" />
@@ -909,7 +902,7 @@ export default function Page() {
               <button
                 onClick={() => shareImage(fullscreenImage)}
                 disabled={sharingImage === fullscreenImage}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 title={sharingImage === fullscreenImage ? "Sharing..." : "Share"}
               >
                 <Share2 size={20} className="text-foreground" />
@@ -929,7 +922,7 @@ export default function Page() {
 
       {/* Toast Notification */}
       {toast.show && (
-        <div className="fixed top-4 right-4 bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-lg animate-fade-in z-50">
+        <div className="fixed top-4 right-4 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground px-6 py-3 rounded-lg shadow-lg animate-fade-in z-50">
           {toast.message}
         </div>
       )}

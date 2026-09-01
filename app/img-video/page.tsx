@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { VivafyHeader, primaryButton, inputClass } from "@/components/vivafy-header"
 import { Wand2, Save, Library, Film, ArrowLeft, Download, Share2, Trash2, X, Upload } from "lucide-react"
 import { DeepSeekModal } from "@/components/deepseek-modal"
 import PixabayPage from "@/components/pixabay-page"
@@ -434,14 +435,14 @@ export default function Page() {
                         <button
                           onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
                           disabled={currentPage === 0}
-                          className="w-8 h-8 bg-primary hover:bg-primary/85 disabled:bg-gray-700 disabled:cursor-not-allowed text-foreground rounded-full flex items-center justify-center transition"
+                          className="w-8 h-8 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 disabled:bg-gray-700 disabled:cursor-not-allowed text-foreground rounded-full flex items-center justify-center transition"
                         >
                           &lt;
                         </button>
                         <button
                           onClick={() => setCurrentPage(Math.min(Math.ceil(savedVideos.length / videosPerPage) - 1, currentPage + 1))}
                           disabled={currentPage >= Math.ceil(savedVideos.length / videosPerPage) - 1}
-                          className="w-8 h-8 bg-primary hover:bg-primary/85 disabled:bg-gray-700 disabled:cursor-not-allowed text-foreground rounded-full flex items-center justify-center transition"
+                          className="w-8 h-8 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 disabled:bg-gray-700 disabled:cursor-not-allowed text-foreground rounded-full flex items-center justify-center transition"
                         >
                           &gt;
                         </button>
@@ -478,7 +479,7 @@ export default function Page() {
                           key={index}
                           onClick={() => setCurrentPage(index)}
                           className={`w-2 h-2 rounded-full transition ${
-                            currentPage === index ? "bg-primary" : "bg-muted hover:bg-primary/20"
+                            currentPage === index ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)]" : "bg-muted hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/20"
                           }`}
                         />
                       ))}
@@ -501,7 +502,7 @@ export default function Page() {
                         {/* Download Button */}
                         <button
                           onClick={handleDownloadVideo}
-                          className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/85 transition hover:scale-110 transform duration-200"
+                          className="w-16 h-16 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground flex items-center justify-center hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 transition hover:scale-110 transform duration-200"
                           title="Download"
                         >
                           <Download size={24} />
@@ -510,7 +511,7 @@ export default function Page() {
                         {/* Share Button */}
                         <button
                           onClick={handleShareVideo}
-                          className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/85 transition hover:scale-110 transform duration-200"
+                          className="w-16 h-16 rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-primary-foreground flex items-center justify-center hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 transition hover:scale-110 transform duration-200"
                           title="Share"
                         >
                           <Share2 size={24} />
@@ -534,16 +535,7 @@ export default function Page() {
         </div>
       )}
       {/* Header with Back Button */}
-      <header className="mb-8 flex items-center justify-between border-b border-border/60 pb-5">
-        <div className="flex items-center gap-3"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png" alt="Vivafy AI" className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm" /><span className="text-lg font-semibold tracking-tight">vivafy <span className="text-primary">AI</span></span></div>
-        <button
-          onClick={() => window.location.href = '/dashboard'}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
-        >
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
-      </header>
+<VivafyHeader />
 
       {/* Center Title */}
      <div className="flex flex-col items-center justify-center mb-24 text-center">
@@ -588,7 +580,7 @@ export default function Page() {
                 <button
                   title="Magic"
                   onClick={() => setIsDeepSeekOpen(true)}
-                  className="p-1 hover:bg-primary rounded transition text-muted-foreground hover:text-foreground"
+                  className="p-1 hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] rounded transition text-muted-foreground hover:text-foreground"
                 >
                   <Wand2 size={16} />
                 </button>
@@ -596,7 +588,7 @@ export default function Page() {
                 <button
                   title="Library"
                   onClick={handleOpenLibrary}
-                  className="p-1 hover:bg-primary rounded transition text-muted-foreground hover:text-foreground"
+                  className="p-1 hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] rounded transition text-muted-foreground hover:text-foreground"
                 >
                   <Save size={16} />
                 </button>
@@ -604,7 +596,7 @@ export default function Page() {
                 <button
                   title="Library"
                   onClick={() => setIsPixabayOpen(true)}
-                  className="p-1 hover:bg-primary rounded transition text-muted-foreground hover:text-foreground"
+                  className="p-1 hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)] rounded transition text-muted-foreground hover:text-foreground"
                 >
                   <Library size={16} />
                 </button>
@@ -637,7 +629,7 @@ export default function Page() {
                   </button>
                 </div>
 
-                <label className="block px-4 py-2 bg-primary hover:bg-primary/85 border border-primary rounded-xl cursor-pointer transition text-center text-sm text-foreground">
+                <label className="block px-4 py-2 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 border border-primary rounded-xl cursor-pointer transition text-center text-sm text-foreground">
                   <input
                     type="file"
                     accept="image/*"
@@ -719,7 +711,7 @@ export default function Page() {
               <button
                 onClick={handleImageUrlImport}
                 disabled={importLoading}
-                className="px-5 bg-primary hover:bg-primary/85 rounded-xl text-sm font-medium text-primary-foreground transition"
+                className="px-5 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 rounded-xl text-sm font-medium text-primary-foreground transition"
               >
                 {importLoading ? "Importing..." : "Import"}
               </button>
@@ -737,7 +729,7 @@ export default function Page() {
                 <a
                   href={videoUrl}
                   download
-                  className="flex-1 px-6 py-3 bg-primary hover:bg-primary/85 text-primary-foreground font-semibold rounded-xl text-center transition"
+                  className="flex-1 px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-primary-foreground font-semibold rounded-xl text-center transition"
                 >
                   Download
                 </a>
@@ -746,7 +738,7 @@ export default function Page() {
                 <button
                   onClick={handleUploadVideo}
                   disabled={uploading}
-                  className="flex-1 px-6 py-3 bg-primary hover:bg-primary/85 disabled:bg-primary/60 disabled:opacity-50 text-primary-foreground font-semibold rounded-xl transition flex items-center justify-center gap-2"
+                  className="flex-1 px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/60 disabled:opacity-50 text-primary-foreground font-semibold rounded-xl transition flex items-center justify-center gap-2"
                 >
                   <Upload size={20} />
                   {uploading ? "Saving..." : "Upload"}
@@ -771,7 +763,7 @@ export default function Page() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center text-center">
-              <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-primary/10 text-primary ring-8 ring-primary/5">
+              <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/10 text-primary ring-8 ring-primary/5">
                 <Film size={44} strokeWidth={1.7} />
               </div>
 
@@ -894,7 +886,7 @@ export default function Page() {
               <button
                 onClick={() => setAudio(!audio)}
                 className={`w-12 h-6 flex items-center rounded-full p-1 transition ${
-                  audio ? "bg-primary" : "bg-[#1f2937]"
+                  audio ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)]" : "bg-[#1f2937]"
                 }`}
               >
                 <div
@@ -910,7 +902,7 @@ export default function Page() {
           <button
             onClick={handleGenerate}
             disabled={loading || !prompt}
-            className="w-full px-6 py-3 bg-primary hover:bg-primary/85 disabled:bg-primary/60 disabled:opacity-50 text-primary-foreground font-semibold rounded-xl transition duration-200"
+            className="w-full px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/60 disabled:opacity-50 text-primary-foreground font-semibold rounded-xl transition duration-200"
           >
             {loading ? "Generating..." : "Generate Video (20 credits)"}
           </button>

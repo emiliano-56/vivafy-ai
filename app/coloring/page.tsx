@@ -13,7 +13,8 @@ import {
   ChevronDown
 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
-import Footer from '@/components/footer'
+ import Footer from '@/components/footer'
+ import { VivafyHeader, primaryButton, inputClass } from '@/components/vivafy-header'
 
 const API =  "https://zoop-a1-v2.onrender.com"
 
@@ -391,11 +392,8 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-white text-black">
 
-      {/* HEADER */}
-
-      <div className="border-b border-[#5b5a98]/20 px-6 py-5 flex items-center justify-between bg-white">
-
-        <div>
+      <VivafyHeader />
+      <div className="flex items-center justify-between bg-white px-6 py-5"><div>
           <h1 className="text-2xl font-bold text-black">
             Amazon KDP Coloring Book Generator
           </h1>
@@ -416,7 +414,7 @@ export default function Page() {
 
           <button
             onClick={() => router.push('/dashboard')}
-            className="bg-[#5b5a98] hover:bg-[#f26b43] text-white px-5 py-3 rounded-xl font-semibold transition-all"
+            className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[#f26b43] text-white px-5 py-3 rounded-xl font-semibold transition-all"
           >
             Back to Home
           </button>
@@ -424,7 +422,7 @@ export default function Page() {
           <button
             onClick={exportPDF}
             disabled={loadingPDF}
-            className="bg-[#5b5a98] hover:bg-[#4a497d] disabled:bg-[#5b5a98]/70 text-white px-5 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all"
+            className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[#4a497d] disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/70 text-white px-5 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all"
           >
             {loadingPDF ? (
               <>
@@ -490,7 +488,7 @@ export default function Page() {
                           toggleDropdown('style')
                         }}
                         className={`px-4 py-2 cursor-pointer transition-all text-sm border-l-4 ${form.style === style
-                          ? "bg-[#5b5a98] text-white font-semibold border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold border-l-[#5b5a98]"
                           : "bg-white text-black border-l-[#5b5a98]/20 hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -535,7 +533,7 @@ export default function Page() {
                           toggleDropdown('audience')
                         }}
                         className={`px-4 py-2 cursor-pointer transition-all text-sm border-l-4 ${form.audience === audience
-                          ? "bg-[#5b5a98] text-white font-semibold border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold border-l-[#5b5a98]"
                           : "bg-white text-black border-l-[#5b5a98]/20 hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -558,7 +556,7 @@ export default function Page() {
                     key={num}
                     onClick={() => setForm({ ...form, number_of_pages: num })}
                     className={`px-2 py-2 rounded-lg cursor-pointer transition-all text-center text-sm ${form.number_of_pages === num
-                      ? "bg-[#5b5a98] text-white font-semibold"
+                      ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold"
                       : "bg-white border border-[#5b5a98]/20 text-black hover:border-[#5b5a98]"
                       }`}
                   >
@@ -639,7 +637,7 @@ export default function Page() {
                           toggleDropdown('niche')
                         }}
                         className={`px-4 py-2 cursor-pointer transition-all text-sm border-l-4 ${form.niche === niche
-                          ? "bg-[#5b5a98] text-white font-semibold border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold border-l-[#5b5a98]"
                           : "bg-white text-black border-l-[#5b5a98]/20 hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -676,7 +674,7 @@ export default function Page() {
                           toggleDropdown('mood')
                         }}
                         className={`px-4 py-2 cursor-pointer transition-all text-sm border-l-4 ${form.mood === mood
-                          ? "bg-[#5b5a98] text-white font-semibold border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold border-l-[#5b5a98]"
                           : "bg-white text-black border-l-[#5b5a98]/20 hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -766,7 +764,7 @@ export default function Page() {
                           toggleDropdown("format")
                         }}
                         className={`px-5 py-4 cursor-pointer transition-all border-l-4 ${form.aspect_ratio === value
-                          ? "bg-[#5b5a98] text-white border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white border-l-[#5b5a98]"
                           : "bg-white text-black border-l-transparent hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -820,7 +818,7 @@ export default function Page() {
                           toggleDropdown('pageSize')
                         }}
                         className={`px-4 py-2 cursor-pointer transition-all text-sm border-l-4 ${form.page_size === size
-                          ? "bg-[#5b5a98] text-white font-semibold border-l-[#5b5a98]"
+                          ? "bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white font-semibold border-l-[#5b5a98]"
                           : "bg-white text-black border-l-transparent hover:bg-[#f26b43] hover:text-white hover:border-l-[#f26b43]"
                           }`}
                       >
@@ -835,7 +833,7 @@ export default function Page() {
             <button
               onClick={generateStory}
               disabled={loadingStory}
-              className="w-full bg-[#5b5a98] hover:bg-[#4a497d] disabled:bg-[#5b5a98]/60 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all"
+              className="w-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[#4a497d] disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/60 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all"
             >
               {loadingStory ? (
                 <>
@@ -853,7 +851,7 @@ export default function Page() {
             <button
               onClick={generateImages}
               disabled={loadingImages || !coloringBook}
-              className="w-full bg-[#5b5a98] hover:bg-[#4a497d] disabled:bg-[#5b5a98]/50 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all"
+              className="w-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[#4a497d] disabled:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/50 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all"
             >
               {loadingImages ? (
                 <>
@@ -912,7 +910,7 @@ export default function Page() {
 
                 {/* PAGE NUMBER */}
                 <div className="mb-3 text-center">
-                  <span className="bg-[#5b5a98] text-white px-4 py-1 rounded-full text-sm font-bold">
+                  <span className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white px-4 py-1 rounded-full text-sm font-bold">
                     Page {page.page_number}
                   </span>
                 </div>

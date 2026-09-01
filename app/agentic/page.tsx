@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { 
-  ArrowLeft, 
   ChevronLeft, 
  
   ArrowRight,
@@ -21,6 +20,7 @@ import {
   User,
 } from 'lucide-react'
 import Footer from '@/components/footer'
+import { inputClass, primaryButton } from '@/components/vivafy-header'
 import ReactMarkdown from 'react-markdown'
 
 export default function AiAgentPage() {
@@ -309,7 +309,7 @@ export default function AiAgentPage() {
               {/* New Chat Button */}
               <button
                 onClick={handleNewChat}
-                className="mx-4 mb-6 py-3 px-4 bg-white hover:bg-white rounded-lg font-semibold flex items-center justify-center gap-2 transition-all"
+                className={`${primaryButton} mx-4 mb-6`}
               >
                
                 <span>New Chat</span>
@@ -394,23 +394,9 @@ export default function AiAgentPage() {
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-          <header className="mb-8 flex items-center justify-between border-b border-border/60 px-6 pb-5 pt-5">
-            <div className="flex items-center gap-3">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c499285c-186e-4c66-8181-3b746e8fa908-d5JlRpN182u3UULfog6rqqzKJQqZK5.png"
-                alt="Vivafy AI"
-                className="size-10 rounded-xl bg-white/95 object-contain p-1 shadow-sm"
-              />
-              <span className="text-lg font-semibold tracking-tight">
-                vivafy <span className="text-primary">AI</span>
-              </span>
-            </div>
-            <button
-              onClick={() => window.location.href = '/dashboard'}
-              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
-            >
-              <ArrowLeft size={16} />
-              Back to Home
+          <header className="flex items-center justify-end border-b border-[#8b2de21f] px-6 py-4">
+            <button onClick={() => { window.location.href = '/dashboard' }} className="rounded-xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110">
+              <ArrowRight className="mr-2 inline-block size-4 rotate-180" /> Back to Home
             </button>
           </header>
 
@@ -442,12 +428,12 @@ export default function AiAgentPage() {
                       <button
                         key={idx}
                         onClick={() => setMessage(`${prompt.title} ${prompt.subtitle}`)}
-                        className="p-6 rounded-xl border border-[#5b5a98]/20 hover:border-[#5b5a98]/35 bg-white hover:bg-white/5 transition-all group text-left"
+                        className="group rounded-2xl border border-[#8b2de233] bg-[linear-gradient(145deg,#ffffff_0%,#fbf8ff_52%,#f2fbff_100%)] p-6 text-left transition-all hover:-translate-y-1 hover:border-[#17d5da99] hover:shadow-[0_14px_30px_rgba(139,45,226,0.12)]"
                       >
                         <div className="flex items-start justify-between mb-3">
-                          <IconComponent size={28} className="text-[#5b5a98]" />
+                          <span className="flex size-11 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#8b2de2,#17d5da)] text-white shadow-[0_8px_18px_rgba(139,45,226,0.2)]"><IconComponent size={22} /></span>
                         </div>
-                        <p className="text-sm font-medium text-[#5b5a98] mb-1">{prompt.title}</p>
+                        <p className="text-sm font-medium text-[#252548] mb-1">{prompt.title}</p>
                         <p className="text-xs text-gray-400">{prompt.subtitle}</p>
                         <div className="mt-4 flex justify-end">
                           <ArrowRight size={16} className="text-gray-600 group-hover:text-[#5b5a98] transition-colors" />
@@ -553,7 +539,7 @@ export default function AiAgentPage() {
                   }
                 }}
                 placeholder="Message Vivafy AI..."
-                className="w-full bg-transparent text-[#5b5a98] placeholder-gray-500 outline-none resize-none min-h-12 max-h-32 overflow-y-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-[#5b5a98] scrollbar-track-white"
+                className={`w-full resize-none min-h-12 max-h-32 overflow-y-auto text-sm leading-relaxed outline-none scrollbar-thin scrollbar-thumb-[#7435df] scrollbar-track-white ${inputClass}`}
                 rows={2}
               />
 
@@ -562,7 +548,7 @@ export default function AiAgentPage() {
                 <button
                   onClick={handleSendWithFiles}
                   disabled={loading || (!message.trim() && uploadedFiles.length === 0)}
-                  className="w-8 h-8 rounded-full bg-white hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center flex-shrink-0"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <ArrowUp size={18} className="text-[#5b5a98]" />
                 </button>
@@ -620,7 +606,7 @@ export default function AiAgentPage() {
                 value={searchQuery}
                 onChange={handleSearch}
                 placeholder="Search by title or content..."
-                className="w-full bg-white/5 border border-[#5b5a98]/20 rounded-lg px-4 py-2 text-[#5b5a98] placeholder-gray-500 outline-none focus:border-[#5b5a98]/35 transition-colors"
+                className={`w-full rounded-lg px-4 py-2 outline-none transition-colors ${inputClass}`}
               />
             </div>
 
