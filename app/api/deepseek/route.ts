@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     }
 
     
-    const apiKey = "sk-b6ab7779c93441f8ae28dfbf0a9895d3";
+    const apiKey = "sk-a414a61222fa4ec99b9b8414a7a0fd42";
 
 if (!apiKey) {
   return NextResponse.json(

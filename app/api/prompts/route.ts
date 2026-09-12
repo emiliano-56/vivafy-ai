@@ -93,8 +93,7 @@ export async function POST(request: Request) {
     // Replace this with your NEW/ROTATED DeepSeek key.
     // Do not commit a real API key to GitHub.
     // --------------------------------------------------
-
-    const apiKey = process.env.DEEPSEEK_API_KEY?.trim()
+ const apiKey = process.env.DEEPSEEK_API_KEY?.trim()
 
 if (!apiKey) {
   return NextResponse.json(

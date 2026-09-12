@@ -24,7 +24,6 @@ import {
   Plus,
   Sparkles,
   Coins,
-  Users,
   BookOpen,
   Clapperboard,
   Video,
@@ -92,9 +91,9 @@ const navGroups = [
       },
       {
         label: 'Library',
-        href: '#',
+        href: '/library',
         icon: Library,
-        count: '128 assets',
+        count: 'library',
       },
       {
         label: 'Prompt studios',
@@ -115,7 +114,7 @@ const navGroups = [
         label: 'Video generator',
         href: '/text-video',
         icon: Video,
-        count: 'Text + video',
+        count: 'video-count',
       },
       {
         label: 'Image · Video',
@@ -177,8 +176,8 @@ const navGroups = [
 ]
 
 const chartConfig = {
-  revenue: { label: 'Revenue', color: '#c92aa8' },
-  orders: { label: 'Orders', color: '#7435df' },
+  images: { label: 'Image generations', color: '#c92aa8' },
+  videos: { label: 'Video generations', color: '#7435df' },
   }
 
 export default function Page() {
@@ -191,6 +190,64 @@ export default function Page() {
   } | null>(null)
   const [userEmail, setUserEmail] = useState('')
   const [activeMetric, setActiveMetric] = useState<string | null>(null)
+  const [mediaCounts, setMediaCounts] = useState({ library: 0, images: 0, videos: 0 })
+  const [videoRenderCount, setVideoRenderCount] = useState(0)
+  const [mediaActivity, setMediaActivity] = useState({
+    images: revenue.map(({ month }) => ({ month, images: 0 })),
+    videos: revenue.map(({ month }) => ({ month, videos: 0 })),
+  })
+
+  useEffect(() => {
+    let active = true
+
+    const loadMediaCounts = async () => {
+      const { data: authData } = await supabase.auth.getUser()
+      if (!authData.user) return
+
+      const [{ data: imageRows }, videoResult] = await Promise.all([
+        supabase
+          .from('images')
+          .select('url, created_at')
+          .eq('user_id', authData.user.id),
+        supabase.storage.from('videos').list(authData.user.id, {
+          limit: 1000,
+          offset: 0,
+          sortBy: { column: 'created_at', order: 'asc' },
+        }),
+      ])
+
+      if (!active) return
+      const images = imageRows ?? []
+      const videos = (videoResult.data ?? []).filter((file) => !file.name.startsWith('.'))
+      if (videoResult.error) {
+        console.error('[v0] Failed to load dashboard videos:', videoResult.error)
+      }
+      const videoCount = videos.length
+      setVideoRenderCount(videoCount)
+      setMediaCounts({ library: images.length + videoCount, images: images.length, videos: videoCount })
+
+      const imageActivity = revenue.map(({ month }) => ({ month, images: 0 }))
+      const videoActivity = revenue.map(({ month }) => ({ month, videos: 0 }))
+      images.forEach((item: { created_at?: string | null }) => {
+        const month = item.created_at ? new Date(item.created_at).toLocaleString('en-US', { month: 'short' }) : null
+        const point = imageActivity.find((entry) => entry.month === month)
+        if (point) point.images += 1
+      })
+      videos.forEach((file) => {
+        const month = file.created_at ? new Date(file.created_at).toLocaleString('en-US', { month: 'short' }) : null
+        const point = videoActivity.find((entry) => entry.month === month)
+        if (point) point.videos += 1
+      })
+      setMediaActivity({ images: imageActivity, videos: videoActivity })
+    }
+
+    loadMediaCounts()
+    const refresh = window.setInterval(loadMediaCounts, 15000)
+    return () => {
+      active = false
+      window.clearInterval(refresh)
+    }
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -283,7 +340,7 @@ export default function Page() {
 
                       {item.count && (
                         <span className="ml-2 shrink-0 rounded-full bg-[#ffffff1f] px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[#ffffffcc]">
-                          {item.count}
+                          {item.count === 'library' ? mediaCounts.library : item.count === 'video-count' ? mediaCounts.videos : item.count}
                         </span>
                       )}
                     </a>
@@ -314,13 +371,6 @@ export default function Page() {
                   White label
                 </a>
 
-                <a
-                  href="/connections"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
-                >
-                  <Users className="size-4" />
-                  Connections
-                </a>
               </nav>
             </div>
           </div>
@@ -332,7 +382,7 @@ export default function Page() {
             </div>
 
             <p className="text-xs leading-5 text-muted-foreground">
-              Visit our help center to learn more about zeyroh.
+              Visit our help center to learn more about Vivafy AI.
             </p>
 
             <Button variant="link" className="mt-2 h-auto p-0 text-xs">
@@ -549,13 +599,12 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                 <button type="button" aria-label="Dismiss metric details" onClick={() => setActiveMetric(null)} className="ml-4 rounded-full px-2 py-1 text-[#8b2de2] transition hover:bg-[#8b2de21a]">×</button>
               </motion.div>
             )}
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {[
-                ['AI generations', '12,840', '+28.4%', Sparkles, '#5b31e8', '#f0edff'],
-                ['Video renders', '1,284', '+18.7%', Video, '#ed2b9b', '#fff0f8'],
-                ['Image gen', '8,549', '+32.1%', ImageIcon, '#10b4c8', '#e8fbfd'],
-                ['Landing page', '4.82x', '+8.6%', ArrowUpRight, '#ff6934', '#fff2ec'],
-              ].map(([label, value, change, Icon, color, tint], index) => (
+                ['AI generations', mediaCounts.images + mediaCounts.videos, 100, Sparkles, '#5b31e8', '#f0edff'],
+                ['Video renders', mediaCounts.videos, mediaCounts.images + mediaCounts.videos > 0 ? (mediaCounts.videos / (mediaCounts.images + mediaCounts.videos)) * 100 : 0, Video, '#ed2b9b', '#fff0f8'],
+                ['Image gen', mediaCounts.images, mediaCounts.images + mediaCounts.videos > 0 ? (mediaCounts.images / (mediaCounts.images + mediaCounts.videos)) * 100 : 0, ImageIcon, '#10b4c8', '#e8fbfd'],
+              ].map(([label, value, percentage, Icon, color, tint], index) => (
                 <motion.div
                   key={label as string}
                   initial={{ opacity: 0, y: 12 }}
@@ -583,7 +632,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                           style={{ backgroundColor: tint as string, color: color as string }}
                         >
                           <Icon className="size-3" />
-                          {change as string}
+                          {`+${(percentage as number).toFixed(1)}%`}
                         </Badge>
                       </div>
 
@@ -591,7 +640,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{
-                            width: `${[76, 62, 84, 48][index]}%`,
+                            width: `${percentage as number}%`,
                           }}
                           transition={{
                             duration: 0.9,
@@ -605,6 +654,33 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                   </Card>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <Card className="border-0 bg-[#ffffff] shadow-[0_4px_18px_rgba(35,35,110,0.04)]">
+                <CardContent className="flex items-center justify-between gap-4 p-5">
+                  <div>
+                    <CardTitle className="text-base">Infographics</CardTitle>
+                    <CardDescription className="mt-1">Turn ideas into visual stories.</CardDescription>
+                  </div>
+                  <Button type="button" onClick={() => router.push('/infographics')} className="rounded-xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] font-semibold text-white hover:brightness-110">
+                    Open
+                    <ArrowUpRight className="size-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+              <Card className="border-0 bg-[#ffffff] shadow-[0_4px_18px_rgba(35,35,110,0.04)]">
+                <CardContent className="flex items-center justify-between gap-4 p-5">
+                  <div>
+                    <CardTitle className="text-base">Write ads</CardTitle>
+                    <CardDescription className="mt-1">Create high-converting ad copy.</CardDescription>
+                  </div>
+                  <Button type="button" onClick={() => router.push('/write-ads')} className="rounded-xl bg-[linear-gradient(90deg,#8b2de2,#17d5da)] font-semibold text-white hover:brightness-110">
+                    Open
+                    <ArrowUpRight className="size-4" />
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
 
             <div className="mt-6 grid gap-6 xl:grid-cols-[1.55fr_1fr]">
@@ -630,7 +706,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                   >
                     <ResponsiveContainer width="100%" height="100%">
                     <AreaChart
-                      data={revenue}
+                      data={mediaActivity.images}
                       margin={{
                         left: -20,
                         right: 8,
@@ -703,7 +779,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                       />
 
                       <Area
-                        dataKey="revenue"
+                        dataKey="images"
                         type="natural"
                         fill="url(#revenueFill)"
                         stroke="url(#revenueStroke)"
@@ -746,7 +822,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                   >
                     <ResponsiveContainer width="100%" height="100%">
                     <BarChart
-                      data={orders}
+                      data={mediaActivity.videos}
                       margin={{
                         left: -25,
                         right: 0,
@@ -787,7 +863,7 @@ className="absolute inset-y-0 right-0 h-full w-full object-contain object-right 
                       />
 
                       <Bar
-                        dataKey="orders"
+                        dataKey="videos"
                         radius={[6, 6, 0, 0]}
                         fill="url(#activityBars)"
                       >
