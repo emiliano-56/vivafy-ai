@@ -60,7 +60,7 @@ export default function AdminDashboard() {
     username: '',
     firstName: '',
     lastName: '',
-    packageType: 'ZoopAI Commercial',
+    packageType: 'AI-Front End',
     credits: 0,
   });
 
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
 
   const [topupEmail, setTopupEmail] = useState('');
   const [topupPackage, setTopupPackage] =
-    useState('ZoopAI Commercial');
+    useState('AI-Front End');
 
   const [topupCredits, setTopupCredits] = useState(0);
 
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
         username: '',
         firstName: '',
         lastName: '',
-        packageType: 'ZoopAI Commercial',
+        packageType: 'AI-Front End',
         credits: 0,
       });
     } catch (err: any) {
@@ -412,20 +412,28 @@ export default function AdminDashboard() {
             </SelectTrigger>
 
             <SelectContent className="bg-purple-100">
-              <SelectItem value="ZoopAI Commercial">
-                ZoopAI Commercial
+              <SelectItem value="AI-Front End">
+                Vivafy AI - Front End
               </SelectItem>
 
-              <SelectItem value="Platinum Edition">
-                Platinum Edition
+              <SelectItem value="Vivafy AI - Platinum Edition">
+                Vivafy AI - Platinum Edition
               </SelectItem>
 
-              <SelectItem value="ZoopAI Agent">
-                ZoopAI Agent
+              <SelectItem value="Vivafy AI - Agentic PRO">
+                Vivafy AI - Agentic PRO
               </SelectItem>
 
-              <SelectItem value="Studio Engine">
-                Studio Engine
+              <SelectItem value="Vivafy AI Studio">
+                Vivafy AI Studio
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Reseller">
+                Vivafy AI - Reseller
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Whitelabel">
+                Vivafy AI - Whitelabel
               </SelectItem>
             </SelectContent>
           </Select>
@@ -488,20 +496,28 @@ export default function AdminDashboard() {
             </SelectTrigger>
 
             <SelectContent className="bg-purple-100 border-purple-500/30">
-              <SelectItem value="ZoopAI Commercial">
-                ZoopAI Commercial
+              <SelectItem value="AI-Front End">
+                Vivafy AI - Front End
               </SelectItem>
 
-              <SelectItem value="Platinum Edition">
-                Platinum Edition
+              <SelectItem value="Vivafy AI - Platinum Edition">
+                Vivafy AI - Platinum Edition
               </SelectItem>
 
-              <SelectItem value="ZoopAI Agent">
-                ZoopAI Agent
+              <SelectItem value="Vivafy AI - Agentic PRO">
+                Vivafy AI - Agentic PRO
               </SelectItem>
 
-              <SelectItem value="Studio Engine">
-                Studio Engine
+              <SelectItem value="Vivafy AI Studio">
+                Vivafy AI Studio
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Reseller">
+                Vivafy AI - Reseller
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Whitelabel">
+                Vivafy AI - Whitelabel
               </SelectItem>
             </SelectContent>
           </Select>
