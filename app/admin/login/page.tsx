@@ -132,13 +132,14 @@ export default function AdminLoginPage() {
             </div>
           )}
 
-          {/* Button */}
-          <Button
-            disabled={loading}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-5"
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </Button>
+         {/* Button */}
+<Button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-5"
+>
+  {loading ? 'Signing in...' : 'Sign In'}
+</Button>
         </form>
 
         <p className="text-center text-gray-500 text-sm mt-6">

@@ -95,39 +95,36 @@ const JVZOO_PRODUCTS: Record<
     credits: number;
   }
 > = {
-  "426139": {
-    name: "Vivafy AI Front End",
-    credits: 300,
+  "452417": {
+    name: "Vivafy AI - Front End",
+    credits: 500,
   },
 
-  "426547": {
-    name: "Vivafy AI OTO1",
+  "452825": {
+    name: "Vivafy AI - Platinum Edition",
+    credits: 800,
+  },
+
+  "452821": {
+    name: "Vivafy AI - Agentic PRO",
+    credits: 1000,
+  },
+
+  "452823": {
+    name: "Vivafy AI Studio",
+    credits: 1100,
+  },
+
+  "452419": {
+    name: "Vivafy AI - Reseller",
     credits: 1200,
   },
 
-  "426773": {
-    name: "Vivafy AI OTO2",
-    credits: 600,
-  },
-
-  "426775": {
-    name: "Vivafy AI OTO3",
-    credits: 1800,
-  },
-
-  "426777": {
-    name: "Vivafy AI OTO4",
-    credits: 10000,
-  },
-
-  // SAMPLE ONLY
-  "426779": {
-    name: "Vivafy AI OTO5",
-    credits: 15000,
+  "452827": {
+    name: "Vivafy AI - Whitelabel",
+    credits: 1500,
   },
 };
-
-
 // ============================================================
 // HELPER: SHA-1 JVZOO V2 VERIFICATION
 // ============================================================

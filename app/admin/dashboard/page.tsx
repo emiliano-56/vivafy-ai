@@ -15,10 +15,12 @@ import { Eye, EyeOff } from 'lucide-react';
 
 type Metrics = {
   totalUsers: number;
-  commercial: number;
+  frontEnd: number;
   platinum: number;
-  agent: number;
+  agenticPro: number;
   studio: number;
+  reseller: number;
+  whitelabel: number;
 };
 
 type UserProfile = {
@@ -60,7 +62,7 @@ export default function AdminDashboard() {
     username: '',
     firstName: '',
     lastName: '',
-    packageType: 'ZoopAI Commercial',
+    packageType: 'AI-Front End',
     credits: 0,
   });
 
@@ -73,7 +75,7 @@ export default function AdminDashboard() {
 
   const [topupEmail, setTopupEmail] = useState('');
   const [topupPackage, setTopupPackage] =
-    useState('ZoopAI Commercial');
+    useState('AI-Front End');
 
   const [topupCredits, setTopupCredits] = useState(0);
 
@@ -92,19 +94,36 @@ export default function AdminDashboard() {
 
   // ---------------- LOAD METRICS ----------------
   useEffect(() => {
+    const readJson = async (res: Response) => {
+      const text = await res.text();
+      if (!text) throw new Error(`Request failed (${res.status})`);
+      try {
+        return JSON.parse(text);
+      } catch {
+        throw new Error(`Request failed (${res.status})`);
+      }
+    };
+
     const fetchMetrics = async () => {
-      const res = await fetch('/api/admin/metrics');
-      const data = await res.json();
-      setMetrics(data);
+      try {
+        const res = await fetch('/api/admin/metrics');
+        const data = await readJson(res);
+        if (!res.ok) throw new Error(data.error || 'Failed to load metrics');
+        setMetrics(data);
+      } catch (err) {
+        console.error('Error fetching metrics:', err);
+      }
     };
 
     const fetchUsers = async () => {
       try {
         const res = await fetch('/api/admin/all-users');
-        const data = await res.json();
-        setUsersList(data);
+        const data = await readJson(res);
+        if (!res.ok) throw new Error(data.error || 'Failed to fetch users');
+        setUsersList(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Error fetching users:', err);
+        setUsersList([]);
       }
     };
 
@@ -147,9 +166,15 @@ export default function AdminDashboard() {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: { error?: string } = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        throw new Error(`Create user failed (${res.status})`);
+      }
 
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) throw new Error(data.error || 'Failed to create user');
 
       setMessage('User created successfully 🚀');
 
@@ -159,7 +184,7 @@ export default function AdminDashboard() {
         username: '',
         firstName: '',
         lastName: '',
-        packageType: 'ZoopAI Commercial',
+        packageType: 'AI-Front End',
         credits: 0,
       });
     } catch (err: any) {
@@ -250,11 +275,11 @@ export default function AdminDashboard() {
 
   // ---------------- UI ----------------
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-white text-slate-900 p-6">
       {/* HEADER */}
       <div className="flex justify-between items-center mb-6 border-b border-purple-500/20 pb-4">
         <h1 className="text-2xl font-bold text-purple-400">
-          ZoopAI Admin Panel
+          Vivafy AI Admin Panel
         </h1>
 
         <Button
@@ -295,10 +320,12 @@ export default function AdminDashboard() {
       {tab === 'dashboard' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card title="Total Users" value={metrics?.totalUsers ?? 0} />
-          <Card title="Commercial" value={metrics?.commercial ?? 0} />
-          <Card title="Platinum" value={metrics?.platinum ?? 0} />
-          <Card title="Agent" value={metrics?.agent ?? 0} />
-          <Card title="Studio Engine" value={metrics?.studio ?? 0} />
+          <Card title="Vivafy AI - Front End" value={metrics?.frontEnd ?? 0} />
+          <Card title="Vivafy AI - Platinum Edition" value={metrics?.platinum ?? 0} />
+          <Card title="Vivafy AI - Agentic PRO" value={metrics?.agenticPro ?? 0} />
+          <Card title="Vivafy AI Studio" value={metrics?.studio ?? 0} />
+          <Card title="Vivafy AI - Reseller" value={metrics?.reseller ?? 0} />
+          <Card title="Vivafy AI - Whitelabel" value={metrics?.whitelabel ?? 0} />
         </div>
       )}
 
@@ -310,7 +337,7 @@ export default function AdminDashboard() {
               placeholder="Enter email"
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="bg-black border-purple-500/20"
+              className="bg-white border-purple-500/20"
             />
 
             <Button onClick={handleSearch} className="bg-purple-600">
@@ -407,25 +434,33 @@ export default function AdminDashboard() {
               setForm({ ...form, packageType: value })
             }
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select Package" />
             </SelectTrigger>
 
             <SelectContent className="bg-purple-100">
-              <SelectItem value="ZoopAI Commercial">
-                ZoopAI Commercial
+              <SelectItem value="AI-Front End">
+                Vivafy AI - Front End
               </SelectItem>
 
-              <SelectItem value="Platinum Edition">
-                Platinum Edition
+              <SelectItem value="Vivafy AI - Platinum Edition">
+                Vivafy AI - Platinum Edition
               </SelectItem>
 
-              <SelectItem value="ZoopAI Agent">
-                ZoopAI Agent
+              <SelectItem value="Vivafy AI - Agentic PRO">
+                Vivafy AI - Agentic PRO
               </SelectItem>
 
-              <SelectItem value="Studio Engine">
-                Studio Engine
+              <SelectItem value="Vivafy AI Studio">
+                Vivafy AI Studio
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Reseller">
+                Vivafy AI - Reseller
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Whitelabel">
+                Vivafy AI - Whitelabel
               </SelectItem>
             </SelectContent>
           </Select>
@@ -462,7 +497,7 @@ export default function AdminDashboard() {
             value={topupEmail}
             onValueChange={setTopupEmail}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select User" />
             </SelectTrigger>
 
@@ -483,25 +518,33 @@ export default function AdminDashboard() {
             value={topupPackage}
             onValueChange={setTopupPackage}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue />
             </SelectTrigger>
 
             <SelectContent className="bg-purple-100 border-purple-500/30">
-              <SelectItem value="ZoopAI Commercial">
-                ZoopAI Commercial
+              <SelectItem value="AI-Front End">
+                Vivafy AI - Front End
               </SelectItem>
 
-              <SelectItem value="Platinum Edition">
-                Platinum Edition
+              <SelectItem value="Vivafy AI - Platinum Edition">
+                Vivafy AI - Platinum Edition
               </SelectItem>
 
-              <SelectItem value="ZoopAI Agent">
-                ZoopAI Agent
+              <SelectItem value="Vivafy AI - Agentic PRO">
+                Vivafy AI - Agentic PRO
               </SelectItem>
 
-              <SelectItem value="Studio Engine">
-                Studio Engine
+              <SelectItem value="Vivafy AI Studio">
+                Vivafy AI Studio
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Reseller">
+                Vivafy AI - Reseller
+              </SelectItem>
+
+              <SelectItem value="Vivafy AI - Whitelabel">
+                Vivafy AI - Whitelabel
               </SelectItem>
             </SelectContent>
           </Select>
@@ -516,7 +559,7 @@ export default function AdminDashboard() {
                 Number(e.target.value)
               )
             }
-            className="bg-black border-purple-500/20"
+            className="bg-white border-purple-500/20"
           />
 
           <Button
@@ -545,7 +588,7 @@ export default function AdminDashboard() {
             value={resetEmail}
             onValueChange={setResetEmail}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select User" />
             </SelectTrigger>
 
@@ -607,7 +650,7 @@ export default function AdminDashboard() {
 /* ---------------- CARD COMPONENT ---------------- */
 function Card({ title, value }: { title: string; value: number }) {
   return (
-    <div className="p-4 rounded-xl border border-purple-500/20 bg-black">
+    <div className="p-4 rounded-xl border border-purple-500/20 bg-white">
       <p className="text-gray-400">{title}</p>
       <p className="text-2xl font-bold text-purple-400">{value}</p>
     </div>
