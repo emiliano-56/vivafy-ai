@@ -15,10 +15,12 @@ import { Eye, EyeOff } from 'lucide-react';
 
 type Metrics = {
   totalUsers: number;
-  commercial: number;
+  frontEnd: number;
   platinum: number;
-  agent: number;
+  agenticPro: number;
   studio: number;
+  reseller: number;
+  whitelabel: number;
 };
 
 type UserProfile = {
@@ -250,11 +252,11 @@ export default function AdminDashboard() {
 
   // ---------------- UI ----------------
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-white text-slate-900 p-6">
       {/* HEADER */}
       <div className="flex justify-between items-center mb-6 border-b border-purple-500/20 pb-4">
         <h1 className="text-2xl font-bold text-purple-400">
-          ZoopAI Admin Panel
+          Vivafy AI Admin Panel
         </h1>
 
         <Button
@@ -295,10 +297,12 @@ export default function AdminDashboard() {
       {tab === 'dashboard' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card title="Total Users" value={metrics?.totalUsers ?? 0} />
-          <Card title="Commercial" value={metrics?.commercial ?? 0} />
-          <Card title="Platinum" value={metrics?.platinum ?? 0} />
-          <Card title="Agent" value={metrics?.agent ?? 0} />
-          <Card title="Studio Engine" value={metrics?.studio ?? 0} />
+          <Card title="Vivafy AI - Front End" value={metrics?.frontEnd ?? 0} />
+          <Card title="Vivafy AI - Platinum Edition" value={metrics?.platinum ?? 0} />
+          <Card title="Vivafy AI - Agentic PRO" value={metrics?.agenticPro ?? 0} />
+          <Card title="Vivafy AI Studio" value={metrics?.studio ?? 0} />
+          <Card title="Vivafy AI - Reseller" value={metrics?.reseller ?? 0} />
+          <Card title="Vivafy AI - Whitelabel" value={metrics?.whitelabel ?? 0} />
         </div>
       )}
 
@@ -310,7 +314,7 @@ export default function AdminDashboard() {
               placeholder="Enter email"
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="bg-black border-purple-500/20"
+              className="bg-white border-purple-500/20"
             />
 
             <Button onClick={handleSearch} className="bg-purple-600">
@@ -407,7 +411,7 @@ export default function AdminDashboard() {
               setForm({ ...form, packageType: value })
             }
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select Package" />
             </SelectTrigger>
 
@@ -470,7 +474,7 @@ export default function AdminDashboard() {
             value={topupEmail}
             onValueChange={setTopupEmail}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select User" />
             </SelectTrigger>
 
@@ -491,7 +495,7 @@ export default function AdminDashboard() {
             value={topupPackage}
             onValueChange={setTopupPackage}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue />
             </SelectTrigger>
 
@@ -532,7 +536,7 @@ export default function AdminDashboard() {
                 Number(e.target.value)
               )
             }
-            className="bg-black border-purple-500/20"
+            className="bg-white border-purple-500/20"
           />
 
           <Button
@@ -561,7 +565,7 @@ export default function AdminDashboard() {
             value={resetEmail}
             onValueChange={setResetEmail}
           >
-            <SelectTrigger className="w-full bg-black border-purple-500/20">
+            <SelectTrigger className="w-full bg-white border-purple-500/20">
               <SelectValue placeholder="Select User" />
             </SelectTrigger>
 
@@ -623,7 +627,7 @@ export default function AdminDashboard() {
 /* ---------------- CARD COMPONENT ---------------- */
 function Card({ title, value }: { title: string; value: number }) {
   return (
-    <div className="p-4 rounded-xl border border-purple-500/20 bg-black">
+    <div className="p-4 rounded-xl border border-purple-500/20 bg-white">
       <p className="text-gray-400">{title}</p>
       <p className="text-2xl font-bold text-purple-400">{value}</p>
     </div>

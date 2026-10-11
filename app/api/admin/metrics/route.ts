@@ -7,32 +7,44 @@ export async function GET() {
       .from("profiles")
       .select("*", { count: "exact", head: true });
 
-    const { count: commercial } = await supabaseAdmin
+    const { count: frontEnd } = await supabaseAdmin
       .from("profiles")
       .select("*", { count: "exact", head: true })
-      .eq("package", "ZoopAI Commercial");
+      .eq("package", "AI-Front End");
 
     const { count: platinum } = await supabaseAdmin
       .from("profiles")
       .select("*", { count: "exact", head: true })
-      .eq("package", "Platinum Edition");
+      .eq("package", "Vivafy AI - Platinum Edition");
 
-    const { count: agent } = await supabaseAdmin
+    const { count: agenticPro } = await supabaseAdmin
       .from("profiles")
       .select("*", { count: "exact", head: true })
-      .eq("package", "ZoopAI Agent");
+      .eq("package", "Vivafy AI - Agentic PRO");
 
     const { count: studio } = await supabaseAdmin
       .from("profiles")
       .select("*", { count: "exact", head: true })
-      .eq("package", "Studio Engine");
+      .eq("package", "Vivafy AI Studio");
+
+    const { count: reseller } = await supabaseAdmin
+      .from("profiles")
+      .select("*", { count: "exact", head: true })
+      .eq("package", "Vivafy AI - Reseller");
+
+    const { count: whitelabel } = await supabaseAdmin
+      .from("profiles")
+      .select("*", { count: "exact", head: true })
+      .eq("package", "Vivafy AI - Whitelabel");
 
     return NextResponse.json({
       totalUsers,
-      commercial,
+      frontEnd,
       platinum,
-      agent,
+      agenticPro,
       studio,
+      reseller,
+      whitelabel,
     });
   } catch (error) {
     return NextResponse.json(
