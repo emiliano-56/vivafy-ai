@@ -3,7 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export async function GET() {
   try {
-    const { count: totalUsers } = await supabaseAdmin
+    const { count: totalUsers, error: totalUsersError } = await supabaseAdmin
       .from("profiles")
       .select("*", { count: "exact", head: true });
 
@@ -37,14 +37,18 @@ export async function GET() {
       .select("*", { count: "exact", head: true })
       .eq("package", "Vivafy AI - Whitelabel");
 
+    if (totalUsersError) {
+      throw totalUsersError;
+    }
+
     return NextResponse.json({
-      totalUsers,
-      frontEnd,
-      platinum,
-      agenticPro,
-      studio,
-      reseller,
-      whitelabel,
+      totalUsers: totalUsers ?? 0,
+      frontEnd: frontEnd ?? 0,
+      platinum: platinum ?? 0,
+      agenticPro: agenticPro ?? 0,
+      studio: studio ?? 0,
+      reseller: reseller ?? 0,
+      whitelabel: whitelabel ?? 0,
     });
   } catch (error) {
     return NextResponse.json(

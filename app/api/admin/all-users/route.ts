@@ -17,6 +17,7 @@ export async function GET() {
     const { data, error } = await supabaseAdmin
       .from('profiles')
       .select('id, email')
+      .not('email', 'is', null)
       .order('email');
 
     if (error) {

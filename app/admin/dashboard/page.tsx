@@ -94,19 +94,36 @@ export default function AdminDashboard() {
 
   // ---------------- LOAD METRICS ----------------
   useEffect(() => {
+    const readJson = async (res: Response) => {
+      const text = await res.text();
+      if (!text) throw new Error(`Request failed (${res.status})`);
+      try {
+        return JSON.parse(text);
+      } catch {
+        throw new Error(`Request failed (${res.status})`);
+      }
+    };
+
     const fetchMetrics = async () => {
-      const res = await fetch('/api/admin/metrics');
-      const data = await res.json();
-      setMetrics(data);
+      try {
+        const res = await fetch('/api/admin/metrics');
+        const data = await readJson(res);
+        if (!res.ok) throw new Error(data.error || 'Failed to load metrics');
+        setMetrics(data);
+      } catch (err) {
+        console.error('Error fetching metrics:', err);
+      }
     };
 
     const fetchUsers = async () => {
       try {
         const res = await fetch('/api/admin/all-users');
-        const data = await res.json();
-        setUsersList(data);
+        const data = await readJson(res);
+        if (!res.ok) throw new Error(data.error || 'Failed to fetch users');
+        setUsersList(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Error fetching users:', err);
+        setUsersList([]);
       }
     };
 
@@ -149,9 +166,15 @@ export default function AdminDashboard() {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: { error?: string } = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        throw new Error(`Create user failed (${res.status})`);
+      }
 
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) throw new Error(data.error || 'Failed to create user');
 
       setMessage('User created successfully 🚀');
 
