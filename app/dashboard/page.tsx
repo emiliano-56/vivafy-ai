@@ -79,101 +79,77 @@ const orders = [
   { day: 'Sun', orders: 51 },
 ]
 
-const navGroups = [
+type NavItem = {
+  label: string
+  href: string
+  icon: typeof LayoutDashboard
+  count?: 'library' | 'video-count'
+}
+
+type NavGroup = {
+  title: string
+  items: NavItem[]
+}
+
+const navGroups: NavGroup[] = [
   {
     title: 'Workspace',
     items: [
-      {
-        label: 'Overview',
-        href: '/dashboard',
-        icon: LayoutDashboard,
-        active: true,
-      },
-      {
-        label: 'Library',
-        href: '/library',
-        icon: Library,
-        count: 'library',
-      },
-      {
-        label: 'Prompt studios',
-        href: '/prompt-studio',
-        icon: WandSparkles,
-      },
+      { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+      { label: 'Library', href: '/library', icon: Library, count: 'library' },
+      { label: 'Prompt studio', href: '/prompt-studio', icon: WandSparkles },
+      { label: 'Story', href: '/story', icon: Clapperboard },
+      { label: 'Marketing', href: '/marketing', icon: Megaphone },
     ],
   },
   {
     title: 'Generate',
     items: [
-      {
-        label: 'Comic generator',
-        href: '/comic',
-        icon: FileImage,
-      },
-      {
-        label: 'Video generator',
-        href: '/text-video',
-        icon: Video,
-        count: 'video-count',
-      },
-      {
-        label: 'Image · Video',
-        href: '/img-video',
-        icon: ImageIcon,
-      },
-      {
-        label: 'Image generator',
-        href: '/text-image',
-        icon: ImageIcon,
-      },
-      {
-        label: 'Chat Image',
-        href: '/chat-image',
-        icon: MessageSquare,
-      },
-      {
-        label: 'AI avatar',
-        href: '/avatar',
-        icon: Bot,
-      },
-      {
-        label: 'Story',
-        href: '/story',
-        icon: Clapperboard,
-      },
+      { label: 'Comic generator', href: '/comic', icon: FileImage },
+      { label: 'Video generator', href: '/text-video', icon: Video, count: 'video-count' },
+      { label: 'Image generator', href: '/text-image', icon: ImageIcon },
+      { label: 'Coloring book', href: '/coloring', icon: Palette },
+      { label: 'Chat image', href: '/chat-image', icon: MessageSquare },
     ],
   },
   {
-    title: 'Grow',
+    title: 'Studio',
     items: [
-      {
-        label: 'Marketing',
-        href: '/marketing',
-        icon: Megaphone,
-      },
-      {
-        label: 'Agentic',
-        href: '/agentic',
-        icon: Bot,
-      },
-      {
-        label: 'Cover designs',
-        href: '/cover',
-        icon: BookOpen,
-      },
-      {
-        label: 'Landing page builder',
-        href: '/landings',
-        icon: LayoutDashboard,
-      },
-      {
-        label: 'Coloring book',
-        href: '/coloring',
-        icon: Palette,
-      },
+      { label: 'AI avatar', href: '/avatar', icon: Bot },
+      { label: 'Cover designs', href: '/cover', icon: BookOpen },
+      { label: 'Agentic', href: '/agentic', icon: Bot },
+      { label: 'Landing page builder', href: '/landings', icon: LayoutDashboard },
     ],
   },
 ]
+
+const planFeatures: Record<string, string[]> = {
+  frontend: ['Overview', 'Library', 'Prompt studio', 'Story', 'Marketing'],
+  platinum: ['Overview', 'Library', 'Prompt studio', 'Story', 'Marketing', 'Comic generator', 'Video generator', 'Image generator'],
+  agentic: ['Overview', 'Library', 'Prompt studio', 'Story', 'Marketing', 'Comic generator', 'Video generator', 'Image generator', 'Coloring book', 'Chat image'],
+  studio: ['Overview', 'Library', 'Prompt studio', 'Story', 'Marketing', 'Comic generator', 'Video generator', 'Image generator', 'Coloring book', 'Chat image', 'AI avatar', 'Cover designs', 'Agentic', 'Landing page builder'],
+  reseller: ['Overview', 'Library', 'Prompt studio', 'Reseller'],
+  whitelabel: ['Overview', 'Library', 'Prompt studio', 'White labels'],
+}
+
+const planOrder = ['frontend', 'platinum', 'agentic', 'studio', 'reseller', 'whitelabel']
+const upgradeLinks = {
+  frontend: 'https://vip.launchspecial.net/vivafyai/otos/platinum',
+  platinum: 'https://vip.launchspecial.net/vivafyai/otos/agentic',
+  agentic: 'https://vip.launchspecial.net/vivafyai/otos/studio',
+  studio: 'https://vip.launchspecial.net/vivafyai/otos/reseller',
+  reseller: 'https://vip.launchspecial.net/vivafyai/otos/whitelabel',
+} as const
+
+function getPlanKey(packageName: string | null) {
+  const normalized = (packageName ?? '').toLowerCase().replace(/[^a-z]/g, '')
+  if (normalized.includes('whitelabel')) return 'whitelabel'
+  if (normalized.includes('reseller')) return 'reseller'
+  if (normalized.includes('studio')) return 'studio'
+  if (normalized.includes('agentic')) return 'agentic'
+  if (normalized.includes('platinum')) return 'platinum'
+  return 'frontend'
+}
 
 const chartConfig = {
   images: { label: 'Image generations', color: '#c92aa8' },
@@ -286,7 +262,25 @@ export default function Page() {
 
   const firstName = profile?.first_name || 'there'
   const credits = profile?.credits ?? 0
-  const packageName = profile?.package || 'Free'
+  const packageName = profile?.package || 'Vivafy AI-Front End'
+  const planKey = getPlanKey(profile?.package ?? null)
+  const enabledFeatures = planFeatures[planKey]
+  const visibleNavGroups = navGroups
+    .map((group) => ({
+      ...group,
+      items: group.items.filter((item) => enabledFeatures.includes(item.label)),
+    }))
+    .filter((group) => group.items.length > 0)
+  const manageItems: NavItem[] = [
+    ...(enabledFeatures.includes('Reseller')
+      ? [{ label: 'Reseller', href: '/reseller', icon: CircleDollarSign }]
+      : []),
+    ...(enabledFeatures.includes('White labels')
+      ? [{ label: 'White labels', href: '/white', icon: Globe2 }]
+      : []),
+  ]
+  const nextPlanKey = planOrder[planOrder.indexOf(planKey) + 1] as keyof typeof upgradeLinks | undefined
+  const upgradeHref = nextPlanKey ? upgradeLinks[nextPlanKey] : undefined
   const hour = new Date().getHours()
   const greeting =
     hour < 12
@@ -313,7 +307,7 @@ export default function Page() {
           </div>
 
           <div className="mt-10 flex flex-1 flex-col gap-6 overflow-y-auto pr-1">
-            {navGroups.map((group) => (
+            {visibleNavGroups.map((group) => (
               <div key={group.title}>
                 <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ffffff80]">
                   {group.title}
@@ -328,7 +322,7 @@ export default function Page() {
                       key={item.label}
                       href={item.href}
                       className={`flex items-center justify-between rounded-lg px-3 py-2 text-[13px] transition-colors ${
-                        item.active
+                        item.href === '/dashboard'
                           ? 'bg-[linear-gradient(90deg,#4031d8,#7131d7,#08afc7)] text-[#ffffff] shadow-[0_8px_20px_rgba(24,20,112,0.35)]'
                           : 'text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]'
                       }`}
@@ -355,41 +349,42 @@ export default function Page() {
               </p>
 
               <nav className="flex flex-col gap-1">
-                <a
-                  href="/reseller"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
-                >
-                  <CircleDollarSign className="size-4" />
-                  Reseller
-                </a>
-
-                <a
-                  href="/white"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
-                >
-                  <Globe2 className="size-4" />
-                  White label
-                </a>
-
+                {manageItems.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[#ffffffcc] hover:bg-[#ffffff14] hover:text-[#ffffff]"
+                  >
+                    <item.icon className="size-4" />
+                    {item.label}
+                  </a>
+                ))}
               </nav>
             </div>
           </div>
 
-          <div className="rounded-xl bg-[#ffffff14] p-4 text-[#ffffff]">
-            <div className="mb-3 flex items-center gap-2 text-xs font-medium">
-              <CircleHelp className="size-4" />
-              Need some help?
+          {upgradeHref && (
+            <div className="rounded-xl bg-[#ffffff14] p-4 text-[#ffffff]">
+              <div className="mb-3 flex items-center gap-2 text-xs font-medium">
+                <CircleDollarSign className="size-4" />
+                Upgrade
+              </div>
+
+              <p className="text-xs leading-5 text-[#ffffffb3]">
+                Unlock more Vivafy AI features with the next plan.
+              </p>
+
+              <a
+                href={upgradeHref}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex h-auto items-center p-0 text-xs text-[#ffffff] underline-offset-4 hover:underline"
+              >
+                View upgrade options
+                <ArrowUpRight className="ml-1 size-3" />
+              </a>
             </div>
-
-            <p className="text-xs leading-5 text-muted-foreground">
-              Visit our help center to learn more about Vivafy AI.
-            </p>
-
-            <Button variant="link" className="mt-2 h-auto p-0 text-xs">
-              Open help center
-              <ArrowUpRight className="ml-1 size-3" />
-            </Button>
-          </div>
+          )}
         </aside>
 
         <section className="min-w-0 flex-1">
@@ -422,6 +417,7 @@ export default function Page() {
             <div className="flex items-center gap-2 sm:gap-4">
               <Button
                 variant="ghost"
+                onClick={() => router.push('/credits')}
                 className="hidden h-9 gap-2 px-3 text-primary hover:bg-secondary sm:flex"
               >
                 <Coins className="size-4" />
@@ -462,7 +458,10 @@ export default function Page() {
 
                 {profileOpen && (
                   <div className="absolute right-0 top-12 z-20 flex w-44 flex-col gap-1 rounded-xl bg-card p-2 shadow-xl ring-1 ring-foreground/10">
-                    <button className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-secondary">
+                    <button
+                      onClick={() => router.push('/credits')}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-secondary"
+                    >
                       <Coins className="size-4 text-primary" />
                       Credits
                       <span className="ml-auto text-xs text-muted-foreground">
@@ -510,7 +509,7 @@ export default function Page() {
                 <div className="mt-10 flex flex-wrap gap-3 sm:mt-12">
                   <Button
                     size="lg"
-                    onClick={() => router.push('/story')}
+                    onClick={() => router.push('/infographics')}
                     className="h-12 gap-2 rounded-xl bg-[linear-gradient(100deg,#ff2fae,#ff9b24)] px-6 font-semibold text-[#ffffff] shadow-[0_12px_26px_rgba(255,104,73,0.34)] transition-transform hover:-translate-y-0.5 hover:brightness-105"
                   >
                     <Sparkles className="size-4" />
@@ -520,7 +519,7 @@ export default function Page() {
                   <Button
                     size="lg"
                     variant="secondary"
-                    onClick={() => router.push('/landings')}
+                    onClick={() => router.push('/write-ads')}
                     className="h-12 gap-2 rounded-xl border border-[#ffffff66] bg-[#ffffff18] px-6 font-semibold text-[#ffffff] shadow-[0_8px_20px_rgba(40,16,130,0.12)] backdrop-blur-sm transition-colors hover:bg-[#ffffff2e] hover:text-[#ffffff]"
                   >
                     Explore tools

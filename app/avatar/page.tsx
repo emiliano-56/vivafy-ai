@@ -273,7 +273,6 @@ export default function Page() {
   const calculateVideoCredits = (duration: string) => {
     if (duration === "8s") return 20
     if (duration === "30s") return 60
-    if (duration === "56s") return 140
     return 20
   }
 
@@ -808,7 +807,6 @@ export default function Page() {
                 <SelectContent className="bg-card border-border/70">
                   <SelectItem value="8s">Quick (8s)</SelectItem>
                   <SelectItem value="30s">Pro (30s)</SelectItem>
-                  <SelectItem value="56s">Premium (56s)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -838,7 +836,7 @@ export default function Page() {
             disabled={loading || !prompt}
             className="w-full px-6 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:brightness-110 disabled:bg-primary/60 disabled:opacity-50 text-primary-foreground font-semibold rounded-xl transition duration-200"
           >
-            {loading ? "Generating..." : "Generate Video (20 credits)"}
+            {loading ? "Generating..." : "Generate Video"}
           </button>
 
           {error && (

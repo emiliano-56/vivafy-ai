@@ -260,7 +260,6 @@ ${prompt}
   const calculateVideoCredits = (duration: string) => {
     if (duration === "8s") return 20
     if (duration === "30s") return 60
-    if (duration === "56s") return 140
     return 20
   }
 
@@ -467,7 +466,6 @@ ${prompt}
                   <SelectContent className="bg-secondary text-secondary-foreground border-primary/20 hover:border-[#f26b43]">
                     <SelectItem value="8s">8s</SelectItem>
                     <SelectItem value="30s">30s</SelectItem>
-                    <SelectItem value="56s">56s</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -498,7 +496,7 @@ ${prompt}
             disabled={loading || !prompt}
             className="mt-6 w-full py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 text-white transition rounded-xl font-medium flex-shrink-0"
           >
-            {loading ? "Generating..." : "Generate Video (20 crdits)"}
+            {loading ? "Generating..." : "Generate Video"}
           </button>
 
           {error && <p className="text-red-400 mt-4 flex-shrink-0">{error}</p>}
