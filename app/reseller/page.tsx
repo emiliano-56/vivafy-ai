@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -29,7 +28,7 @@ export default function ResellerPage() {
           </div>
 
           <h2 className="text-5xl font-bold leading-tight md:text-6xl">
-            Partner with <span className="text-primary">Zoop AI</span>
+            Partner with <span className="text-primary">Vivafy AI</span>
             <br />
             and Earn Every Sale
           </h2>
@@ -41,15 +40,21 @@ export default function ResellerPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
-              Request Your Affiliate Link
+            <Button
+              asChild
+              className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85"
+            >
+              <a href="https://jvzoo.com/affiliate/affiliateinfonew/index/452417">
+                Request Your Affiliate Link
+              </a>
             </Button>
 
             <Button
+              asChild
               variant="outline"
               className="border-gray-400/30 bg-gray-400/5 px-8 py-6 text-muted-foreground hover:bg-gray-400 hover:text-black"
             >
-              Learn More
+              <a href="mailto:ojjamesonline@gmail.com">Learn More</a>
             </Button>
           </div>
         </div>
@@ -71,10 +76,10 @@ export default function ResellerPage() {
         </div>
       </section>
 
-      {/* Why Zoop AI */}
+      {/* Why Vivafy AI */}
       <section className="mx-auto max-w-7xl px-6 py-16">
         <h2 className="mb-12 text-center text-4xl font-bold">
-          Why Choose Zoop AI?
+          Why Choose Vivafy AI?
         </h2>
 
         <div className="grid gap-8 md:grid-cols-3">
@@ -246,8 +251,13 @@ export default function ResellerPage() {
             content generation platforms with your audience.
           </p>
 
-          <Button className="mt-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-10 py-6 text-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
-            Request Your Affiliate Link
+          <Button
+            asChild
+            className="mt-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-10 py-6 text-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85"
+          >
+            <a href="https://jvzoo.com/affiliate/affiliateinfonew/index/452417">
+              Request Your Affiliate Link
+            </a>
           </Button>
 
           <p className="mt-8 text-muted-foreground">
