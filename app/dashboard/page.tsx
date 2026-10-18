@@ -417,6 +417,7 @@ export default function Page() {
             <div className="flex items-center gap-2 sm:gap-4">
               <Button
                 variant="ghost"
+                onClick={() => router.push('/credits')}
                 className="hidden h-9 gap-2 px-3 text-primary hover:bg-secondary sm:flex"
               >
                 <Coins className="size-4" />
@@ -457,7 +458,10 @@ export default function Page() {
 
                 {profileOpen && (
                   <div className="absolute right-0 top-12 z-20 flex w-44 flex-col gap-1 rounded-xl bg-card p-2 shadow-xl ring-1 ring-foreground/10">
-                    <button className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-secondary">
+                    <button
+                      onClick={() => router.push('/credits')}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm hover:bg-secondary"
+                    >
                       <Coins className="size-4 text-primary" />
                       Credits
                       <span className="ml-auto text-xs text-muted-foreground">

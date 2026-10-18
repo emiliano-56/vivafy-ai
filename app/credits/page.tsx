@@ -15,25 +15,35 @@ interface Plan {
 
 const plans: Plan[] = [
   {
-    name: 'ZoopAI Commercial',
+    name: 'Vivafy AI-Front End',
     credits: 500,
-    url: 'www.example1.com',
+    url: 'https://vip.launchspecial.net/vivafyai/',
   },
   {
-    name: 'Platinum Edition',
+    name: 'Vivafy AI-Platinum',
     credits: 1000,
-    url: 'www.example2.com',
+    url: 'https://vip.launchspecial.net/vivafyai/otos/platinum',
   },
   {
-    name: 'ZoopAI Agent',
+    name: 'Vivafy AI-Agentic PRO',
     credits: 1500,
-    url: 'www.example3.com',
+    url: 'https://vip.launchspecial.net/vivafyai/otos/agentic',
   },
   {
-    name: 'Studio Engine',
+    name: 'Vivafy AI Studio',
     credits: 2000,
-    url: 'www.example4.com',
+    url: 'https://vip.launchspecial.net/vivafyai/otos/studio',
     highlighted: true,
+  },
+  {
+    name: 'Vivafy AI-Reseller',
+    credits: 2500,
+    url: 'https://vip.launchspecial.net/vivafyai/otos/reseller',
+  },
+  {
+    name: 'Vivafy AI-Whitelabel',
+    credits: 3000,
+    url: 'https://vip.launchspecial.net/vivafyai/otos/whitelabel',
   },
 ];
 
@@ -193,7 +203,7 @@ export default function MyCreditsPage() {
                   <div className="flex-grow" />
 
                   <a
-                    href={`https://${plan.url}`}
+                    href={plan.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`w-full py-2 px-4 rounded-lg font-semibold transition-all text-center ${
@@ -276,7 +286,7 @@ export default function MyCreditsPage() {
                         Or visit your plan page
                       </p>
                       <a
-                        href={`https://${currentPlanUrl}`}
+                        href={currentPlanUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-between w-full px-4 py-3 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85 border border-primary/30 text-foreground rounded-lg font-semibold transition-all"
