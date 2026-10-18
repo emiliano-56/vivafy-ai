@@ -39,15 +39,16 @@ export default function WhiteLabelsPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
-              Get White Label Package
+            <Button asChild className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-white hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
+              <a href="mailto:ojjamesonline@gmail.com">Get White Label Package</a>
             </Button>
 
             <Button
+              asChild
               variant="outline"
               className="border-gray-400/30 bg-gray-400/5 px-8 py-6 text-muted-foreground hover:bg-gray-400 hover:text-black"
             >
-              View Documentation
+              <a href="mailto:ojjamesonline@gmail.com">View Documentation</a>
             </Button>
           </div>
         </div>
@@ -255,15 +256,16 @@ export default function WhiteLabelsPage() {
         </p>
 
         <div className="mt-10 flex justify-center gap-4">
-          <Button className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
-            View Documentation
+          <Button asChild className="bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-8 py-6 text-foreground hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
+            <a href="mailto:ojjamesonline@gmail.com">View Documentation</a>
           </Button>
 
           <Button
+            asChild
             variant="outline"
             className="border-gray-400/30 bg-gray-400/5 px-8 py-6 text-muted-foreground hover:bg-gray-400 hover:text-black"
           >
-            Contact Support
+            <a href="mailto:ojjamesonline@gmail.com">Contact Support</a>
           </Button>
         </div>
       </section>
@@ -282,8 +284,8 @@ export default function WhiteLabelsPage() {
             AI content generation platform with vivafy AI technology.
           </p>
 
-          <Button className="mt-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-10 py-6 text-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
-            Get White Label Package
+          <Button asChild className="mt-10 bg-[linear-gradient(90deg,#8b2de2,#17d5da)] px-10 py-6 text-lg hover:bg-[linear-gradient(90deg,#8b2de2,#17d5da)]/85">
+            <a href="mailto:ojjamesonline@gmail.com">Get White Label Package</a>
           </Button>
 
           <p className="mt-8 text-muted-foreground">
