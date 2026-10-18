@@ -260,7 +260,6 @@ ${prompt}
   const calculateVideoCredits = (duration: string) => {
     if (duration === "8s") return 20
     if (duration === "30s") return 60
-    if (duration === "56s") return 140
     return 20
   }
 
@@ -467,7 +466,6 @@ ${prompt}
                   <SelectContent className="bg-secondary text-secondary-foreground border-primary/20 hover:border-[#f26b43]">
                     <SelectItem value="8s">8s</SelectItem>
                     <SelectItem value="30s">30s</SelectItem>
-                    <SelectItem value="56s">56s</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

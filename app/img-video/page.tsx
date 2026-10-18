@@ -305,7 +305,6 @@ export default function Page() {
   const calculateVideoCredits = (duration: string) => {
     if (duration === "8s") return 20
     if (duration === "30s") return 60
-    if (duration === "56s") return 140
     return 20
   }
 
@@ -874,7 +873,6 @@ export default function Page() {
                 <SelectContent className="bg-card border-border/70">
                   <SelectItem value="8s">Quick (8s)</SelectItem>
                   <SelectItem value="30s">Pro (30s)</SelectItem>
-                  <SelectItem value="56s">Premium (56s)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
